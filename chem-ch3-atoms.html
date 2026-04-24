@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Atoms, Molecules, and Ions | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .nav-links .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .chapter-content h3 { color: #0d3b1a; margin: 1.8rem 0 1rem; font-size: 1.3rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .example-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
+        .formula { background: #1a1a2e; color: #00c853; padding: 0.8rem 1.5rem; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; margin: 1.5rem 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #1a5c2a; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 20px; padding: 30px; width: 450px; text-align: center; }
+        .copy-btn { background: #1a5c2a; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .close-modal { background: #ddd; color: #333; padding: 12px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-header span { cursor: pointer; font-size: 20px; }
+        .ai-body { padding: 15px; height: 300px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; flex-wrap: wrap; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .chip:hover { background: #1a5c2a; color: white; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .ai-widget { width: 95%; right: 2.5%; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><h1>🧪 ChemistryMaster.ng</h1><span>Chapter 3: Atoms, Molecules, and Ions</span></div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb"><a href="chemistry-index.html">Library</a> › <strong>Chapter 3: Atoms, Molecules, Ions</strong></div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header"><h1>Chapter 3: Atoms, Molecules, and Ions</h1><div class="chapter-meta"><span>📘 SS1 First Term</span><span>⏱️ Reading: 35 mins</span></div></div>
+        <div class="learning-objectives"><h3>🎯 Learning Objectives</h3><ul><li>Describe atomic structure</li><li>Define atomic number and mass number</li><li>Explain isotopes</li><li>Distinguish atoms, molecules, and ions</li><li>Write chemical formulas</li></ul></div>
+        
+        <article class="chapter-content">
+            <h2>3.1 Structure of the Atom</h2>
+            <div class="definition-box"><strong>📌 Atom:</strong> The smallest particle of an element that can take part in a chemical reaction. It consists of protons, neutrons, and electrons.</div>
+            <table>
+                <tr><th>Particle</th><th>Symbol</th><th>Charge</th><th>Mass</th><th>Location</th></tr>
+                <tr><td>Proton</td><td>p⁺</td><td>+1</td><td>1</td><td>Nucleus</td></tr>
+                <tr><td>Neutron</td><td>n⁰</td><td>0</td><td>1</td><td>Nucleus</td></tr>
+                <tr><td>Electron</td><td>e⁻</td><td>−1</td><td>1/1840</td><td>Shells (orbits)</td></tr>
+            </table>
+            
+            <h2>3.2 Atomic Number and Mass Number</h2>
+            <div class="definition-box"><strong>📌 Atomic Number (Z):</strong> Number of protons in an atom.<br><strong>📌 Mass Number (A):</strong> Number of protons + neutrons.</div>
+            <div class="formula">A = Z + N &nbsp;&nbsp;(N = number of neutrons)</div>
+            <div class="example-box"><strong>📐 Example:</strong> Sodium (Na): Z=11, A=23. Neutrons = 23−11 = <strong>12 neutrons</strong>.</div>
+            
+            <h2>3.3 Isotopes</h2>
+            <div class="definition-box"><strong>📌 Isotopes:</strong> Atoms of the same element with the same number of protons but different numbers of neutrons.</div>
+            <div class="example-box"><strong>📐 Examples:</strong><br>• Carbon-12: 6p, 6n | Carbon-14: 6p, 8n<br>• Chlorine-35: 17p, 18n | Chlorine-37: 17p, 20n</div>
+            <p>Isotopes have the <strong>same chemical properties</strong> but <strong>different physical properties</strong> (mass).</p>
+            
+            <h2>3.4 Molecules</h2>
+            <div class="definition-box"><strong>📌 Molecule:</strong> Two or more atoms chemically bonded together. Can be same element (O₂, H₂, Cl₂) or different elements (H₂O, CO₂).</div>
+            <table><tr><th>Diatomic Molecules</th><th>Polyatomic Molecules</th></tr><tr><td>H₂, O₂, N₂, Cl₂, I₂, Br₂, F₂</td><td>H₂O, CO₂, NH₃, CH₄, C₆H₁₂O₆</td></tr></table>
+            
+            <h2>3.5 Ions</h2>
+            <div class="definition-box"><strong>📌 Ion:</strong> A charged particle formed when an atom gains or loses electrons.</div>
+            <table><tr><th>Cation (+)</th><th>Anion (−)</th></tr><tr><td>Loses electrons</td><td>Gains electrons</td></tr><tr><td>Metals form cations</td><td>Non-metals form anions</td></tr><tr><td>Na⁺, K⁺, Ca²⁺, Al³⁺</td><td>Cl⁻, O²⁻, SO₄²⁻, NO₃⁻</td></tr></table>
+            
+            <h2>3.6 Writing Chemical Formulas</h2>
+            <p><strong>Rules:</strong></p><ol><li>Write the symbols of elements</li><li>Write their valencies (combining power)</li><li>Cross-multiply valencies</li><li>Simplify if possible</li></ol>
+            <div class="example-box"><strong>📐 Example:</strong> Aluminum oxide: Al³⁺ O²⁻ → Al₂O₃</div>
+            <div class="example-box"><strong>📐 Example:</strong> Calcium chloride: Ca²⁺ Cl⁻ → CaCl₂</div>
+            
+            <table><tr><th>Radical</th><th>Formula</th><th>Valency</th></tr><tr><td>Hydroxide</td><td>OH⁻</td><td>1</td></tr><tr><td>Nitrate</td><td>NO₃⁻</td><td>1</td></tr><tr><td>Sulfate</td><td>SO₄²⁻</td><td>2</td></tr><tr><td>Carbonate</td><td>CO₃²⁻</td><td>2</td></tr><tr><td>Ammonium</td><td>NH₄⁺</td><td>1</td></tr></table>
+            
+            <div style="background:#e8f5e9; padding:1.5rem; border-radius:12px; margin-top:2rem;"><h3 style="color:#1a5c2a;">📝 Chapter 3 Summary</h3><ul><li>Atom = protons + neutrons + electrons</li><li>Atomic number (Z) = protons; Mass number (A) = protons + neutrons</li><li>Isotopes = same Z, different A</li><li>Molecules = 2+ atoms bonded</li><li>Ions = charged particles (cations +, anions −)</li></ul></div>
+        </article>
+        
+        <div class="chapter-nav"><a href="chem-ch2-matter.html">← Previous: Chapter 2</a><a href="chem-ch4-periodic.html" class="next-chapter">Next: Chapter 4 →</a></div>
+    </main>
+    
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard"><h3 style="color:#1a5c2a;">👑 ChemistryMaster Premium</h3><div class="price-naira">₦1,500 <small>one-time</small></div><ul style="margin:1rem 0 1.5rem 1.5rem;"><li>✅ All 20 Chapters</li><li>✅ Unlimited AI Tutor</li><li>✅ WAEC/NECO Prep</li></ul><button class="btn-premium" onclick="openPaymentModal()">💳 Pay with Opay</button><button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Library</button></div>
+    </aside>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal" id="paymentModal"><div class="modal-content"><h3>🟢 Opay Bank Transfer</h3><p>Amount: <strong>₦1,500</strong></p><div style="background:#e8f5e9; padding:15px; border-radius:10px; margin:15px 0; text-align:left;"><p>🏦 Opay (Paycom)</p><p>📱 8052059012 <button class="copy-btn" onclick="copyAccountNumber()">Copy</button></p><p>👤 Alade Timothy Olarewaju</p></div><input type="text" id="payerName" placeholder="Your Full Name"><input type="email" id="payerEmail" placeholder="Your Email"><input type="text" id="transactionRef" placeholder="Opay Reference"><input type="text" id="paymentAmount" value="1500"><button class="btn-premium" onclick="submitPaymentRequest()">📤 Submit</button><div id="paymentStatus"></div><button class="close-modal" onclick="closePaymentModal()">Cancel</button></div></div>
+
+<!-- AI Widget -->
+<div class="ai-widget" id="aiWidget"><div class="ai-header"><span>🧪 Chemistry AI</span><span onclick="closeAI()">✕</span></div><div class="ai-body" id="aiBody"><div class="message ai-msg"><strong>👋 Hello!</strong> Ask me about atoms!</div><div id="chatMessages"></div></div><div class="chips"><span class="chip" onclick="askThis('What is an atom?')">⚛️ Atom</span><span class="chip" onclick="askThis('What are isotopes?')">🔬 Isotopes</span><span class="chip" onclick="askThis('Formula of aluminum oxide')">📝 Al₂O₃</span><span class="chip" onclick="askThis('What is an ion?')">⚡ Ions</span></div><div class="ai-input"><input type="text" id="aiInput" placeholder="Ask me..." onkeypress="if(event.key==='Enter') askAI()"><button onclick="askAI()">Send</button></div></div>
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+
+<footer><p>© 2024 ChemistryMaster.ng • Premium Requires Payment Verification</p></footer>
+
+<script>
+    const OPAY = { bank:"Opay", account:"8052059012", name:"Alade Timothy Olarewaju", amount:1500 };
+    let user = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if(!user) window.location.href='chemistry-login.html';
+    let users = JSON.parse(localStorage.getItem('chemistry_users'))||[];
+    let uData = users.find(u=>u.id===user.id);
+    let premium = uData.premium||false;
+    if(premium){ document.getElementById('premiumBadge').textContent='👑 Premium'; document.getElementById('premiumBadge').style.background='#00a86b'; }
+    
+    function addMsg(t,s){ let d=document.createElement('div'); d.className=`message ${s}-msg`; d.innerHTML=t; document.getElementById('chatMessages').appendChild(d); document.getElementById('aiBody').scrollTop=document.getElementById('aiBody').scrollHeight; }
+    function getAI(q){
+        q=q.toLowerCase();
+        if(q.includes('time')) return `🕐 ${new Date().toLocaleTimeString()}`;
+        if(q.includes('atom')) return '⚛️ An atom is the smallest particle of an element. Has protons(+), neutrons(0), electrons(−).';
+        if(q.includes('isotope')) return '🔬 Isotopes = same element, different neutrons. Example: Carbon-12 (6n) vs Carbon-14 (8n).';
+        if(q.includes('ion')) return '⚡ Ions = charged particles. Cations (+) lose electrons (metals). Anions (−) gain electrons (non-metals).';
+        if(q.includes('molecule')) return '🧬 A molecule = 2+ atoms bonded. Examples: H₂O, CO₂, O₂.';
+        if(q.includes('aluminum oxide')||q.includes('al₂o₃')) return '📝 Al₂O₃: Al³⁺ and O²⁻ → cross multiply → Al₂O₃ (Aluminum oxide).';
+        if(q.includes('calcium chloride')||q.includes('cacl₂')) return '📝 CaCl₂: Ca²⁺ and Cl⁻ → cross multiply → CaCl₂ (Calcium chloride).';
+        if(q.includes('atomic number')) return '📊 Atomic Number (Z) = number of protons. Mass Number (A) = protons + neutrons.';
+        if(q.includes('hello')||q.includes('hi')) return '👋 Hello! Ask me about atoms, isotopes, ions, or chemical formulas!';
+        return '🤔 Try: "What is an atom?" or "Isotopes" or "Formula of aluminum oxide"';
+    }
+    function askAI(){ let i=document.getElementById('aiInput'), q=i.value.trim(); if(!q) return; addMsg(q,'user'); i.value=''; setTimeout(()=>addMsg(getAI(q),'ai'),500); }
+    function askThis(q){ document.getElementById('aiInput').value=q; askAI(); }
+    function closeAI(){ document.getElementById('aiWidget').style.display='none'; document.getElementById('floatingBtn').style.display='flex'; }
+    function openAI(){ document.getElementById('aiWidget').style.display='block'; document.getElementById('floatingBtn').style.display='none'; }
+    function copyAccountNumber(){ navigator.clipboard.writeText(OPAY.account); alert('✅ Copied'); }
+    function openPaymentModal(){ if(premium){ alert('Already Premium!'); return; } document.getElementById('paymentModal').style.display='flex'; }
+    function closePaymentModal(){ document.getElementById('paymentModal').style.display='none'; }
+    function submitPaymentRequest(){ alert('⏳ Submitted! Verified within 24h.'); closePaymentModal(); }
+    function logout(){ sessionStorage.removeItem('chemistry_currentUser'); window.location.href='chemistry-login.html'; }
+    
+    window.askAI=askAI; window.askThis=askThis; window.closeAI=closeAI; window.openAI=openAI;
+    window.openPaymentModal=openPaymentModal; window.closePaymentModal=closePaymentModal;
+    window.submitPaymentRequest=submitPaymentRequest; window.copyAccountNumber=copyAccountNumber; window.logout=logout;
+</script>
+</body>
+</html>

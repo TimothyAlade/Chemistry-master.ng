@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemistryMaster.ng | Complete Chemistry Library</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .nav-links .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .hero { background: linear-gradient(135deg, #1a5c2a, #2a7a3a); color: white; padding: 2rem 2rem; text-align: center; margin-bottom: 2rem; }
+        .hero h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; }
+        .section-title { color: #1a5c2a; margin: 2rem 0 1.5rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.8rem; }
+        .chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+        .chapter-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e0e0e0; text-decoration: none; color: inherit; transition: all 0.2s; display: block; }
+        .chapter-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); border-color: #1a5c2a; }
+        .chapter-card.available { border-left: 4px solid #00a86b; }
+        .chapter-card.locked { opacity: 0.7; border-left: 4px solid #ffc107; cursor: not-allowed; }
+        .chapter-number { color: #1a5c2a; font-weight: bold; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .chapter-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .chapter-status { font-size: 0.8rem; margin-top: 0.8rem; }
+        .status-available { color: #00a86b; }
+        .status-locked { color: #ff8c00; }
+        .premium-cta { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem 3rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; }
+        .resource-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0; }
+        .resource-link { background: #1a5c2a; color: white; padding: 0.6rem 1.5rem; border-radius: 30px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: background 0.2s; }
+        .resource-link:hover { background: #2a7a3a; }
+        .resource-link.locked { background: #ffc107; color: #1a5c2a; cursor: not-allowed; opacity: 0.8; }
+
+        /* Payment Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 20px; padding: 30px; width: 450px; text-align: center; }
+        .modal-content h3 { color: #1a5c2a; margin-bottom: 20px; }
+        .modal-content input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; }
+        .modal-content .account-details { background: #e8f5e9; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left; }
+        .copy-btn { background: #1a5c2a; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .close-modal { background: #ddd; color: #333; padding: 12px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .payment-status { margin-top: 15px; padding: 10px; border-radius: 8px; display: none; }
+        .status-pending { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .status-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info-note { background: #e8f5e9; padding: 10px; border-radius: 8px; margin: 15px 0; font-size: 13px; }
+
+        /* AI Widget */
+        .ai-tutor-widget { position: fixed; bottom: 20px; right: 20px; width: 400px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 1px solid #00c853; display: block; }
+        .tutor-header { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-radius: 20px 20px 0 0; }
+        .tutor-header-left { display: flex; align-items: center; gap: 8px; }
+        .online-indicator { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; }
+        .tutor-header-right { display: flex; gap: 15px; }
+        .minimize-btn, .close-btn { cursor: pointer; font-size: 1.3rem; font-weight: bold; }
+        .close-btn:hover { color: #ff6b6b; }
+        .minimize-btn:hover { color: #ffd700; }
+        .tutor-body { height: 400px; display: flex; flex-direction: column; background: #f8f9fa; }
+        .chat-messages-container { flex: 1; overflow-y: auto; padding: 1rem; }
+        .chat-bubble { background: white; padding: 0.8rem 1rem; border-radius: 15px; margin-bottom: 0.8rem; max-width: 85%; word-wrap: break-word; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .chat-bubble.ai { background: #e8f5e9; border-bottom-left-radius: 5px; }
+        .chat-bubble.user { background: #1a5c2a; color: white; margin-left: auto; border-bottom-right-radius: 5px; }
+        .chat-bubble .time { font-size: 0.65rem; opacity: 0.7; margin-top: 5px; text-align: right; }
+        .tutor-input-area { padding: 1rem; border-top: 1px solid #ddd; background: white; }
+        .tutor-input { display: flex; gap: 8px; }
+        .tutor-input input { flex: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 30px; outline: none; }
+        .tutor-input button { background: #1a5c2a; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 30px; cursor: pointer; font-weight: 500; }
+        .suggestion-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
+        .chip:hover { background: #1a5c2a; color: white; }
+        .question-counter { font-size: 0.75rem; text-align: center; padding: 5px; background: #f0f0f0; }
+        .typing-indicator { display: flex; gap: 5px; padding: 0.8rem 1rem; background: #e8f5e9; border-radius: 15px; width: fit-content; margin-bottom: 0.8rem; }
+        .typing-indicator span { width: 8px; height: 8px; background: #1a5c2a; border-radius: 50%; animation: typing 1.4s infinite; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-8px); opacity: 1; } }
+        .floating-chat-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; border: 2px solid #00c853; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; gap: 1rem; } .ai-tutor-widget { width: 95%; right: 2.5%; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <h1>🧪 ChemistryMaster.ng</h1>
+        <span>Complete SS1-SS3 Chemistry | Premium Access</span>
+    </div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="chemistry-periodic-table.html">📊 Periodic Table</a>
+        <a href="#" id="premiumBadge" class="premium-badge">✨ Go Premium ₦1,500</a>
+        <a href="#" id="logoutBtn">🚪 Logout</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2>🇳🇬 Complete Chemistry Curriculum</h2>
+    <p>SS1 • SS2 • SS3 | Premium Access After Payment Confirmation</p>
+    <p style="margin-top: 0.5rem; opacity: 0.9;" id="userWelcome"></p>
+</section>
+
+<div class="container">
+    <h2 class="section-title">📘 SS1 Chemistry (First Term)</h2>
+    <div class="chapter-grid" id="ss1Chapters"></div>
+    
+    <h2 class="section-title">📗 SS2 Chemistry (Second Term)</h2>
+    <div class="chapter-grid" id="ss2Chapters"></div>
+    
+    <h2 class="section-title">📙 SS3 Chemistry (Third Term)</h2>
+    <div class="chapter-grid" id="ss3Chapters"></div>
+
+    <!-- RESOURCE LINKS -->
+    <div style="background: white; border-radius: 16px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center;">
+        <h3 style="color: #1a5c2a; margin-bottom: 1rem;">📚 Additional Resources</h3>
+        <div class="resource-links" id="resourceLinks"></div>
+        <p style="font-size:0.8rem; color:#666; margin-top:0.8rem;" id="resourceNote"></p>
+    </div>
+    
+    <div class="premium-cta" id="premiumCTA">
+        <h3>👑 Unlock All 20 Chapters + Unlimited AI</h3>
+        <p>Pay ₦1,500 via Opay • Premium activates AFTER payment confirmation</p>
+        <div class="price-naira">₦1,500 <small>one-time</small></div>
+        <button class="btn-premium" id="upgradeBtn">💳 Pay with Opay</button>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <h3>🟢 Opay Bank Transfer</h3>
+        <p>Amount: <strong>₦1,500</strong></p>
+        <div class="account-details">
+            <p><strong>🏦 Bank:</strong> Opay (Paycom)</p>
+            <p><strong>📱 Account Number:</strong> <span id="accountNumber">8052059012</span> 
+                <button class="copy-btn" onclick="copyAccountNumber()">Copy</button>
+            </p>
+            <p><strong>👤 Account Name:</strong> Alade Timothy Olarewaju</p>
+        </div>
+        <div class="info-note"><strong>📋 Important:</strong> Premium access is NOT automatic. Access granted after verification.</div>
+        <input type="text" id="payerName" placeholder="Your Full Name">
+        <input type="email" id="payerEmail" placeholder="Your Email">
+        <input type="text" id="transactionRef" placeholder="Opay Transaction Reference">
+        <input type="text" id="paymentAmount" placeholder="Amount Paid (₦)" value="1500">
+        <button class="btn-premium" onclick="submitPaymentRequest()">📤 Submit for Verification</button>
+        <div id="paymentStatus" class="payment-status"></div>
+        <button class="close-modal" onclick="closePaymentModal()">Cancel</button>
+        <p style="font-size: 11px; margin-top: 15px; color: #999;">Premium activates within 24 hours after payment confirmation.</p>
+    </div>
+</div>
+
+<!-- AI Tutor Widget -->
+<div class="ai-tutor-widget" id="aiTutorWidget">
+    <div class="tutor-header" onclick="toggleTutorBody()">
+        <div class="tutor-header-left">
+            <span class="online-indicator"></span>
+            <span>🧪 ChemistryMaster AI</span>
+        </div>
+        <div class="tutor-header-right">
+            <span class="minimize-btn" id="minimizeBtn" onclick="event.stopPropagation(); toggleTutorBody()">−</span>
+            <span class="close-btn" id="closeBtn" onclick="event.stopPropagation(); closeTutorWidget()">✕</span>
+        </div>
+    </div>
+    <div class="tutor-body" id="tutorBody">
+        <div class="chat-messages-container" id="chatMessagesContainer">
+            <div class="chat-bubble ai"><strong>👋 Hello!</strong> Ask me any chemistry question!</div>
+            <div class="chat-bubble ai"><strong>Try:</strong> "What is the periodic table?" or "Formula for water" or "Balancing equations"</div>
+            <div class="suggestion-chips">
+                <span class="chip" onclick="sendChipMessage('What is an element?')">⚛️ Element</span>
+                <span class="chip" onclick="sendChipMessage('Formula for sulfuric acid')">🧪 H₂SO₄</span>
+                <span class="chip" onclick="sendChipMessage('What is the periodic table?')">📊 Periodic Table</span>
+            </div>
+        </div>
+        <div class="question-counter" id="questionCounter">📊 Questions: <span id="remainingQuestions">10</span> free remaining today</div>
+    </div>
+    <div class="tutor-input-area">
+        <div class="tutor-input">
+            <input type="text" id="chatInput" placeholder="Ask any chemistry question..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()">📤 Send</button>
+        </div>
+    </div>
+</div>
+
+<div class="floating-chat-btn" id="floatingChatBtn" onclick="openTutorWidget()">💬</div>
+
+<footer><p>© 2024 ChemistryMaster.ng • Premium Requires Payment Verification</p></footer>
+
+<script>
+    const OPAY = { bank:"Opay (Paycom)", account:"8052059012", name:"Alade Timothy Olarewaju", amount:1500 };
+    let paymentRequests = JSON.parse(localStorage.getItem('chem_payment_requests')) || [];
+    
+    let currentUser = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if (!currentUser) window.location.href = 'chemistry-login.html';
+    
+    let users = JSON.parse(localStorage.getItem('chemistry_users')) || [];
+    let userData = users.find(u => u.id === currentUser.id);
+    if (!userData) { sessionStorage.removeItem('chemistry_currentUser'); window.location.href = 'chemistry-login.html'; }
+    
+    let isPremium = userData.premium || false;
+    let sessionQuestions = userData.questions || 0;
+    const MAX_FREE = 10;
+    currentUser.premium = isPremium; currentUser.questions = sessionQuestions;
+    sessionStorage.setItem('chemistry_currentUser', JSON.stringify(currentUser));
+
+    const widget = document.getElementById('aiTutorWidget');
+    const tutorBody = document.getElementById('tutorBody');
+    const minimizeBtn = document.getElementById('minimizeBtn');
+    const chatContainer = document.getElementById('chatMessagesContainer');
+    const chatInput = document.getElementById('chatInput');
+    const remainingSpan = document.getElementById('remainingQuestions');
+    const floatingBtn = document.getElementById('floatingChatBtn');
+    const premiumBadge = document.getElementById('premiumBadge');
+    const premiumCTA = document.getElementById('premiumCTA');
+
+    function updateUI() {
+        document.getElementById('userWelcome').innerHTML = `👋 Welcome, ${currentUser.name.split(' ')[0]}! You have <strong>${isPremium ? 'UNLIMITED' : (MAX_FREE - sessionQuestions) + ' free'}</strong> AI questions today.`;
+        if (isPremium) {
+            premiumBadge.textContent = '👑 Premium Active';
+            premiumBadge.style.background = '#00a86b';
+            if (premiumCTA) premiumCTA.style.display = 'none';
+            remainingSpan.textContent = '∞';
+            document.getElementById('questionCounter').innerHTML = '📊 Questions: <span>∞</span> unlimited';
+        } else {
+            remainingSpan.textContent = MAX_FREE - sessionQuestions;
+        }
+        updateResourceLinks();
+    }
+    
+    function updateResourceLinks() {
+        if (isPremium) {
+            document.getElementById('resourceLinks').innerHTML = `
+                <a href="chemistry-periodic-table.html" class="resource-link">📊 Periodic Table</a>
+            `;
+            document.getElementById('resourceNote').innerHTML = '✅ Premium resources available!';
+        } else {
+            document.getElementById('resourceLinks').innerHTML = `
+                <a href="#" class="resource-link locked" onclick="alert('🔒 Upgrade to Premium to unlock the Periodic Table! Pay ₦1,500 via Opay: 8052059012'); return false;">📊 Periodic Table 🔒</a>
+            `;
+            document.getElementById('resourceNote').innerHTML = '🔒 <strong>Premium Required:</strong> Upgrade to unlock the Periodic Table!';
+        }
+    }
+
+    function populateChapters() {
+        const chapters = {
+            ss1: [
+                { num:1, title:'Introduction to Chemistry', file:'chem-ch1-introduction.html', premium:false },
+                { num:2, title:'Matter and Separation Techniques', file:'chem-ch2-matter.html', premium:false },
+                { num:3, title:'Atoms, Molecules, and Ions', file:'chem-ch3-atoms.html', premium:true },
+                { num:4, title:'Periodic Table', file:'chem-ch4-periodic.html', premium:true },
+                { num:5, title:'Chemical Bonding', file:'chem-ch5-bonding.html', premium:true },
+                { num:6, title:'Stoichiometry', file:'chem-ch6-stoichiometry.html', premium:true },
+                { num:7, title:'Acids, Bases, and Salts', file:'chem-ch7-acids.html', premium:true }
+            ],
+            ss2: [
+                { num:8, title:'Organic Chemistry I', file:'chem-ch8-organic1.html', premium:true },
+                { num:9, title:'Chemical Kinetics', file:'chem-ch9-kinetics.html', premium:true },
+                { num:10, title:'Chemical Equilibrium', file:'chem-ch10-equilibrium.html', premium:true },
+                { num:11, title:'Electrochemistry', file:'chem-ch11-electro.html', premium:true },
+                { num:12, title:'Metals and Metallurgy', file:'chem-ch12-metals.html', premium:true },
+                { num:13, title:'Non-Metals', file:'chem-ch13-nonmetals.html', premium:true },
+                { num:14, title:'Water and Solutions', file:'chem-ch14-water.html', premium:true }
+            ],
+            ss3: [
+                { num:15, title:'Organic Chemistry II', file:'chem-ch15-organic2.html', premium:true },
+                { num:16, title:'Nuclear Chemistry', file:'chem-ch16-nuclear.html', premium:true },
+                { num:17, title:'Industrial Chemistry', file:'chem-ch17-industrial.html', premium:true },
+                { num:18, title:'Environmental Chemistry', file:'chem-ch18-environment.html', premium:true },
+                { num:19, title:'Practical Chemistry', file:'chem-ch19-practical.html', premium:true },
+                { num:20, title:'Exam Revision', file:'chem-ch20-revision.html', premium:true }
+            ]
+        };
+        function gen(list, cid) {
+            const c = document.getElementById(cid);
+            if (!c) return;
+            c.innerHTML = list.map(ch => {
+                const locked = ch.premium && !isPremium;
+                return `<a href="${locked ? '#' : ch.file}" class="chapter-card ${locked ? 'locked' : 'available'}" ${locked ? 'onclick="alert(\'Upgrade to Premium to unlock!\'); return false;"' : ''}><div class="chapter-number">Chapter ${ch.num}</div><div class="chapter-title">${ch.title}</div><div class="chapter-status ${locked ? 'status-locked' : 'status-available'}">${locked ? '🔒 Premium' : '✅ Available'}</div></a>`;
+            }).join('');
+        }
+        gen(chapters.ss1, 'ss1Chapters');
+        gen(chapters.ss2, 'ss2Chapters');
+        gen(chapters.ss3, 'ss3Chapters');
+    }
+
+    function copyAccountNumber() { navigator.clipboard.writeText(OPAY.account); alert('✅ Copied: ' + OPAY.account); }
+    function openPaymentModal() { if (isPremium) { alert('Already Premium!'); return; } document.getElementById('payerName').value = currentUser.name || ''; document.getElementById('payerEmail').value = currentUser.email || ''; document.getElementById('paymentModal').style.display = 'flex'; }
+    function closePaymentModal() { document.getElementById('paymentModal').style.display = 'none'; document.getElementById('paymentStatus').style.display = 'none'; }
+    function submitPaymentRequest() {
+        const n = document.getElementById('payerName').value.trim(), e = document.getElementById('payerEmail').value.trim(), r = document.getElementById('transactionRef').value.trim(), a = document.getElementById('paymentAmount').value.trim(), sd = document.getElementById('paymentStatus');
+        if (!n || !e) { sd.style.display='block'; sd.className='payment-status status-error'; sd.innerHTML='❌ Enter name and email.'; return; }
+        if (!r) { sd.style.display='block'; sd.className='payment-status status-error'; sd.innerHTML='❌ Enter reference.'; return; }
+        if (a != OPAY.amount) { sd.style.display='block'; sd.className='payment-status status-error'; sd.innerHTML='❌ Amount must be ₦'+OPAY.amount; return; }
+        if (paymentRequests.find(p=>p.reference===r)) { sd.style.display='block'; sd.className='payment-status status-pending'; sd.innerHTML='⏳ Already submitted.'; return; }
+        paymentRequests.push({ id:'PAY_'+Date.now(), userId:currentUser.id, userName:n, userEmail:e, reference:r, amount:parseFloat(a), status:'pending', submittedAt:new Date().toISOString() });
+        localStorage.setItem('chem_payment_requests', JSON.stringify(paymentRequests));
+        sd.style.display='block'; sd.className='payment-status status-pending'; sd.innerHTML='⏳ Submitted! Verified within 24h.';
+    }
+
+    function addMessage(text, sender) {
+        const div = document.createElement('div'); div.className = `chat-bubble ${sender}`;
+        div.innerHTML = text.replace(/\n/g, '<br>') + '<div class="time">' + new Date().toLocaleTimeString() + '</div>';
+        chatContainer.appendChild(div); chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+    function showTyping() { const div = document.createElement('div'); div.className='typing-indicator'; div.id='typingIndicator'; div.innerHTML='<span></span><span></span><span></span>'; chatContainer.appendChild(div); chatContainer.scrollTop=chatContainer.scrollHeight; }
+    function hideTyping() { const ind = document.getElementById('typingIndicator'); if (ind) ind.remove(); }
+    function canAskQuestion() { if (isPremium) return true; if (sessionQuestions >= MAX_FREE) { alert('⚠️ Free limit! Upgrade ₦1,500'); return false; } return true; }
+    function generateAIResponse(question) {
+        const q = question.toLowerCase().trim();
+        if (q.includes('time')) return `🕐 ${new Date().toLocaleTimeString()} | ${new Date().toDateString()}`;
+        if (q.includes('element')) return `⚛️ An element is a pure substance made of only one type of atom. Examples: Hydrogen (H), Oxygen (O), Carbon (C).`;
+        if (q.includes('periodic table')) return `📊 The Periodic Table arranges elements by atomic number. Groups (columns) have similar properties. Check out our interactive Periodic Table page!`;
+        if (q.includes('h₂so₄') || q.includes('sulfuric acid')) return `🧪 Sulfuric Acid (H₂SO₄): Strong acid used in batteries, fertilizers, and industrial processes.`;
+        if (q.includes('water') || q.includes('h₂o')) return `💧 Water (H₂O): Universal solvent. Boils at 100°C, freezes at 0°C. Essential for life.`;
+        if (q.includes('balancing') || q.includes('equation')) return `📝 To balance equations, ensure same number of each atom on both sides. Example: 2H₂ + O₂ → 2H₂O`;
+        if (q.includes('acid')) return `🧪 Acids have pH < 7, turn litmus red, taste sour. Examples: HCl, H₂SO₄, CH₃COOH.`;
+        if (q.includes('base') || q.includes('alkali')) return `🧼 Bases have pH > 7, turn litmus blue, feel slippery. Examples: NaOH, KOH, Ca(OH)₂.`;
+        if (q.includes('hello') || q.includes('hi')) return `👋 Hello ${currentUser.name.split(' ')[0]}! Ask me any chemistry question!`;
+        return `🤔 Try: "What is an element?" or "Periodic table" or "Balancing equations" or "Acids and bases"`;
+    }
+    function sendMessage() {
+        const msg = chatInput.value.trim(); if (!msg) return;
+        if (!canAskQuestion()) { chatInput.value = ''; return; }
+        addMessage(msg, 'user'); chatInput.value = '';
+        if (!isPremium) { sessionQuestions++; currentUser.questions = sessionQuestions; sessionStorage.setItem('chemistry_currentUser', JSON.stringify(currentUser)); let us=JSON.parse(localStorage.getItem('chemistry_users'))||[]; const ui=us.findIndex(u=>u.id===currentUser.id); if(ui!==-1){us[ui].questions=sessionQuestions; localStorage.setItem('chemistry_users',JSON.stringify(us));} updateUI(); }
+        showTyping();
+        setTimeout(() => { hideTyping(); addMessage(generateAIResponse(msg), 'ai'); if (!isPremium && sessionQuestions >= MAX_FREE) setTimeout(() => addMessage('⚠️ Free limit! Upgrade ₦1,500', 'ai'), 300); }, 800);
+    }
+    function sendChipMessage(msg) { chatInput.value = msg; sendMessage(); }
+    function toggleTutorBody() { if (tutorBody.style.display === 'none') { tutorBody.style.display = 'flex'; document.querySelector('.tutor-input-area').style.display = 'block'; minimizeBtn.textContent = '−'; } else { tutorBody.style.display = 'none'; document.querySelector('.tutor-input-area').style.display = 'none'; minimizeBtn.textContent = '+'; } }
+    function closeTutorWidget() { widget.style.display = 'none'; floatingBtn.style.display = 'flex'; }
+    function openTutorWidget() { widget.style.display = 'block'; floatingBtn.style.display = 'none'; tutorBody.style.display = 'flex'; document.querySelector('.tutor-input-area').style.display = 'block'; minimizeBtn.textContent = '−'; }
+    function logout() { sessionStorage.removeItem('chemistry_currentUser'); window.location.href = 'chemistry-login.html'; }
+    
+    document.getElementById('logoutBtn').addEventListener('click', e => { e.preventDefault(); logout(); });
+    premiumBadge.addEventListener('click', e => { e.preventDefault(); openPaymentModal(); });
+    document.getElementById('upgradeBtn').addEventListener('click', openPaymentModal);
+    
+    window.sendMessage = sendMessage;
+    window.sendChipMessage = sendChipMessage;
+    window.toggleTutorBody = toggleTutorBody;
+    window.closeTutorWidget = closeTutorWidget;
+    window.openTutorWidget = openTutorWidget;
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
+    window.submitPaymentRequest = submitPaymentRequest;
+    window.copyAccountNumber = copyAccountNumber;
+    
+    floatingBtn.style.display = 'none';
+    updateUI();
+    populateChapters();
+</script>
+</body>
+</html>

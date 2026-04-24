@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Periodic Table | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .nav-links .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .example-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #1a5c2a; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 20px; padding: 30px; width: 450px; text-align: center; }
+        .copy-btn { background: #1a5c2a; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .close-modal { background: #ddd; color: #333; padding: 12px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-header span { cursor: pointer; font-size: 20px; }
+        .ai-body { padding: 15px; height: 300px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; flex-wrap: wrap; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .ai-widget { width: 95%; right: 2.5%; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><h1>🧪 ChemistryMaster.ng</h1><span>Chapter 4: Periodic Table</span></div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb"><a href="chemistry-index.html">Library</a> › <strong>Chapter 4: Periodic Table</strong></div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header"><h1>Chapter 4: The Periodic Table</h1><div class="chapter-meta"><span>📘 SS1 First Term</span><span>⏱️ Reading: 35 mins</span></div></div>
+        <div class="learning-objectives"><h3>🎯 Learning Objectives</h3><ul><li>Understand the history of the periodic table</li><li>Identify groups and periods</li><li>Explain periodic trends</li><li>Describe properties of key groups</li></ul></div>
+        
+        <article class="chapter-content">
+            <h2>4.1 History of the Periodic Table</h2>
+            <div class="definition-box"><strong>📌 Dmitri Mendeleev (1869):</strong> Arranged elements by increasing atomic mass, leaving gaps for undiscovered elements. The modern periodic table arranges elements by increasing <strong>atomic number</strong>.</div>
+            <p><strong>Mendeleev's Predictions:</strong> He predicted the existence and properties of gallium (eka-aluminum), scandium (eka-boron), and germanium (eka-silicon) before they were discovered!</p>
+            
+            <h2>4.2 Structure of the Periodic Table</h2>
+            <table>
+                <tr><th>Feature</th><th>Description</th></tr>
+                <tr><td><strong>Groups (Columns)</strong></td><td>Vertical columns (1-18). Elements in same group have similar chemical properties because they have the same number of valence electrons.</td></tr>
+                <tr><td><strong>Periods (Rows)</strong></td><td>Horizontal rows (1-7). Properties change gradually across a period.</td></tr>
+            </table>
+            <div class="key-point"><strong>💡 Memory Tip:</strong> Groups go down ↓ (same properties). Periods go across → (properties change).</div>
+            
+            <h2>4.3 Key Groups in the Periodic Table</h2>
+            <table>
+                <tr><th>Group</th><th>Name</th><th>Properties</th><th>Examples</th></tr>
+                <tr><td>1</td><td>Alkali Metals</td><td>Soft, reactive, 1 valence electron</td><td>Li, Na, K</td></tr>
+                <tr><td>2</td><td>Alkaline Earth Metals</td><td>Less reactive than Group 1, 2 valence electrons</td><td>Mg, Ca, Ba</td></tr>
+                <tr><td>7 (17)</td><td>Halogens</td><td>Very reactive non-metals, 7 valence electrons</td><td>F, Cl, Br, I</td></tr>
+                <tr><td>8 (18)</td><td>Noble Gases</td><td>Unreactive (inert), full outer shell</td><td>He, Ne, Ar, Kr</td></tr>
+                <tr><td>Transition</td><td>Transition Metals</td><td>Form colored compounds, multiple oxidation states</td><td>Fe, Cu, Zn, Ag, Au</td></tr>
+            </table>
+            
+            <h2>4.4 Periodic Trends</h2>
+            <h3>Across a Period (Left → Right)</h3>
+            <ul><li><strong>Atomic radius:</strong> DECREASES (more protons pull electrons closer)</li><li><strong>Ionization energy:</strong> INCREASES (harder to remove electrons)</li><li><strong>Electronegativity:</strong> INCREASES</li><li><strong>Metallic character:</strong> DECREASES</li></ul>
+            
+            <h3>Down a Group (Top → Bottom)</h3>
+            <ul><li><strong>Atomic radius:</strong> INCREASES (more electron shells)</li><li><strong>Ionization energy:</strong> DECREASES (easier to remove electrons)</li><li><strong>Reactivity (metals):</strong> INCREASES</li><li><strong>Reactivity (non-metals):</strong> DECREASES</li></ul>
+            
+            <h2>4.5 First 20 Elements (Must Memorize!)</h2>
+            <table>
+                <tr><th>Z</th><th>Element</th><th>Symbol</th><th>Z</th><th>Element</th><th>Symbol</th></tr>
+                <tr><td>1</td><td>Hydrogen</td><td>H</td><td>11</td><td>Sodium</td><td>Na</td></tr>
+                <tr><td>2</td><td>Helium</td><td>He</td><td>12</td><td>Magnesium</td><td>Mg</td></tr>
+                <tr><td>3</td><td>Lithium</td><td>Li</td><td>13</td><td>Aluminum</td><td>Al</td></tr>
+                <tr><td>4</td><td>Beryllium</td><td>Be</td><td>14</td><td>Silicon</td><td>Si</td></tr>
+                <tr><td>5</td><td>Boron</td><td>B</td><td>15</td><td>Phosphorus</td><td>P</td></tr>
+                <tr><td>6</td><td>Carbon</td><td>C</td><td>16</td><td>Sulfur</td><td>S</td></tr>
+                <tr><td>7</td><td>Nitrogen</td><td>N</td><td>17</td><td>Chlorine</td><td>Cl</td></tr>
+                <tr><td>8</td><td>Oxygen</td><td>O</td><td>18</td><td>Argon</td><td>Ar</td></tr>
+                <tr><td>9</td><td>Fluorine</td><td>F</td><td>19</td><td>Potassium</td><td>K</td></tr>
+                <tr><td>10</td><td>Neon</td><td>Ne</td><td>20</td><td>Calcium</td><td>Ca</td></tr>
+            </table>
+            
+            <div class="key-point"><strong>🎯 WAEC/NECO:</strong> Memorize the first 20 elements (name, symbol, atomic number)! This is tested EVERY year.</div>
+            
+            <div style="background:#e8f5e9; padding:1.5rem; border-radius:12px; margin-top:2rem;"><h3 style="color:#1a5c2a;">📝 Chapter 4 Summary</h3><ul><li>Modern periodic table arranged by atomic number</li><li>Groups = vertical (similar properties); Periods = horizontal</li><li>Key groups: Alkali Metals (1), Halogens (17), Noble Gases (18)</li><li>Across period: radius decreases, ionization energy increases</li><li>Down group: radius increases, ionization energy decreases</li></ul></div>
+        </article>
+        
+        <div class="chapter-nav"><a href="chem-ch3-atoms.html">← Previous: Chapter 3</a><a href="chem-ch5-bonding.html" class="next-chapter">Next: Chapter 5 →</a></div>
+    </main>
+    
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard"><h3 style="color:#1a5c2a;">👑 ChemistryMaster Premium</h3><div class="price-naira">₦1,500 <small>one-time</small></div><ul style="margin:1rem 0 1.5rem 1.5rem;"><li>✅ All 20 Chapters</li><li>✅ Unlimited AI Tutor</li><li>✅ WAEC/NECO Prep</li></ul><button class="btn-premium" onclick="openPaymentModal()">💳 Pay with Opay</button><button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Library</button></div>
+    </aside>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal" id="paymentModal"><div class="modal-content"><h3>🟢 Opay Bank Transfer</h3><p>Amount: <strong>₦1,500</strong></p><div style="background:#e8f5e9; padding:15px; border-radius:10px; margin:15px 0; text-align:left;"><p>🏦 Opay (Paycom)</p><p>📱 8052059012 <button class="copy-btn" onclick="copyAccountNumber()">Copy</button></p><p>👤 Alade Timothy Olarewaju</p></div><input type="text" id="payerName" placeholder="Your Full Name"><input type="email" id="payerEmail" placeholder="Your Email"><input type="text" id="transactionRef" placeholder="Opay Reference"><input type="text" id="paymentAmount" value="1500"><button class="btn-premium" onclick="submitPaymentRequest()">📤 Submit</button><div id="paymentStatus"></div><button class="close-modal" onclick="closePaymentModal()">Cancel</button></div></div>
+
+<!-- AI Widget -->
+<div class="ai-widget" id="aiWidget"><div class="ai-header"><span>🧪 Chemistry AI</span><span onclick="closeAI()">✕</span></div><div class="ai-body" id="aiBody"><div class="message ai-msg"><strong>👋 Hello!</strong> Ask me about the periodic table!</div><div id="chatMessages"></div></div><div class="chips"><span class="chip" onclick="askThis('What are alkali metals?')">🔥 Group 1</span><span class="chip" onclick="askThis('What are halogens?')">🧪 Group 17</span><span class="chip" onclick="askThis('What are noble gases?')">🎈 Group 18</span><span class="chip" onclick="askThis('First 20 elements')">📝 20 Elements</span></div><div class="ai-input"><input type="text" id="aiInput" placeholder="Ask me..." onkeypress="if(event.key==='Enter') askAI()"><button onclick="askAI()">Send</button></div></div>
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+
+<footer><p>© 2024 ChemistryMaster.ng • Premium Requires Payment Verification</p></footer>
+
+<script>
+    const OPAY = { bank:"Opay", account:"8052059012", name:"Alade Timothy Olarewaju", amount:1500 };
+    let user = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if(!user) window.location.href='chemistry-login.html';
+    let users = JSON.parse(localStorage.getItem('chemistry_users'))||[];
+    let uData = users.find(u=>u.id===user.id);
+    let premium = uData.premium||false;
+    if(premium){ document.getElementById('premiumBadge').textContent='👑 Premium'; document.getElementById('premiumBadge').style.background='#00a86b'; }
+    
+    function addMsg(t,s){ let d=document.createElement('div'); d.className=`message ${s}-msg`; d.innerHTML=t; document.getElementById('chatMessages').appendChild(d); document.getElementById('aiBody').scrollTop=document.getElementById('aiBody').scrollHeight; }
+    function getAI(q){
+        q=q.toLowerCase();
+        if(q.includes('time')) return `🕐 ${new Date().toLocaleTimeString()}`;
+        if(q.includes('alkali')) return '🔥 Group 1: Alkali Metals (Li, Na, K, Rb, Cs, Fr). Very reactive, soft, 1 valence electron. React vigorously with water!';
+        if(q.includes('halogen')) return '🧪 Group 17: Halogens (F, Cl, Br, I, At). Very reactive non-metals, 7 valence electrons. Form salts with metals.';
+        if(q.includes('noble gas')) return '🎈 Group 18: Noble Gases (He, Ne, Ar, Kr, Xe, Rn). Unreactive (inert), full outer shell. Used in lighting and balloons.';
+        if(q.includes('20 elements')||q.includes('first 20')) return '📝 First 20: H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca.';
+        if(q.includes('periodic trend')) return '📊 Across period: radius ↓, ionization energy ↑. Down group: radius ↑, ionization energy ↓.';
+        if(q.includes('mendeleev')) return '👨‍🔬 Mendeleev (1869) arranged elements by atomic mass. Modern table arranged by atomic number.';
+        if(q.includes('hello')||q.includes('hi')) return '👋 Hello! Ask me about the periodic table!';
+        return '🤔 Try: "Alkali metals" or "Halogens" or "First 20 elements" or "Periodic trends"';
+    }
+    function askAI(){ let i=document.getElementById('aiInput'), q=i.value.trim(); if(!q) return; addMsg(q,'user'); i.value=''; setTimeout(()=>addMsg(getAI(q),'ai'),500); }
+    function askThis(q){ document.getElementById('aiInput').value=q; askAI(); }
+    function closeAI(){ document.getElementById('aiWidget').style.display='none'; document.getElementById('floatingBtn').style.display='flex'; }
+    function openAI(){ document.getElementById('aiWidget').style.display='block'; document.getElementById('floatingBtn').style.display='none'; }
+    function copyAccountNumber(){ navigator.clipboard.writeText(OPAY.account); alert('✅ Copied'); }
+    function openPaymentModal(){ if(premium){ alert('Already Premium!'); return; } document.getElementById('paymentModal').style.display='flex'; }
+    function closePaymentModal(){ document.getElementById('paymentModal').style.display='none'; }
+    function submitPaymentRequest(){ alert('⏳ Submitted! Verified within 24h.'); closePaymentModal(); }
+    function logout(){ sessionStorage.removeItem('chemistry_currentUser'); window.location.href='chemistry-login.html'; }
+    
+    window.askAI=askAI; window.askThis=askThis; window.closeAI=closeAI; window.openAI=openAI;
+    window.openPaymentModal=openPaymentModal; window.closePaymentModal=closePaymentModal;
+    window.submitPaymentRequest=submitPaymentRequest; window.copyAccountNumber=copyAccountNumber; window.logout=logout;
+</script>
+</body>
+</html>

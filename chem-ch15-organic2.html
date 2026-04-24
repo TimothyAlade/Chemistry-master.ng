@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 15: Organic Chemistry II | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .learning-objectives h3 { color: #1a5c2a; margin-bottom: 0.8rem; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .chapter-content h3 { color: #0d3b1a; margin: 1.8rem 0 1rem; font-size: 1.3rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .definition-box strong { color: #1a5c2a; }
+        .example-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
+        .formula { background: #1a1a2e; color: #00c853; padding: 0.8rem 1.5rem; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; margin: 1.5rem 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #1a5c2a; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; height: fit-content; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; }
+        .chapter-nav a:hover { background: #e8f5e9; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+        
+        /* Payment Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 20px; padding: 30px; width: 450px; text-align: center; }
+        .modal-content h3 { color: #1a5c2a; margin-bottom: 20px; }
+        .modal-content input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; }
+        .modal-content .account-details { background: #e8f5e9; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left; }
+        .copy-btn { background: #1a5c2a; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .close-modal { background: #ddd; color: #333; padding: 12px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .payment-status { margin-top: 15px; padding: 10px; border-radius: 8px; display: none; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .info-note { background: #e8f5e9; padding: 10px; border-radius: 8px; margin: 15px 0; font-size: 13px; }
+
+        /* AI Widget */
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-header span { cursor: pointer; font-size: 20px; }
+        .ai-body { padding: 15px; height: 300px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; flex-wrap: wrap; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .chip:hover { background: #1a5c2a; color: white; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .ai-widget { width: 95%; right: 2.5%; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <h1>🧪 ChemistryMaster.ng</h1>
+        <span>Chapter 15: Organic Chemistry II</span>
+    </div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb">
+    <a href="chemistry-index.html">Library</a> › <a href="chemistry-index.html">SS3 Chemistry</a> › <strong>Chapter 15: Organic Chemistry II</strong>
+</div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header">
+            <h1>Chapter 15: Organic Chemistry II</h1>
+            <div class="chapter-meta">
+                <span>📙 SS3 First Term</span>
+                <span>⏱️ Reading: 40 mins</span>
+                <span>📖 Sections: 6</span>
+            </div>
+        </div>
+        
+        <div class="learning-objectives">
+            <h3>🎯 Learning Objectives</h3>
+            <p>By the end of this chapter, you should be able to:</p>
+            <ul>
+                <li>Describe alcohols, their preparation, and reactions</li>
+                <li>Understand carboxylic acids and their properties</li>
+                <li>Explain esterification and uses of esters</li>
+                <li>Describe saponification (soap making)</li>
+                <li>Explain polymers and polymerization types</li>
+                <li>Identify common polymers and their uses</li>
+            </ul>
+        </div>
+        
+        <article class="chapter-content">
+            
+            <h2>15.1 Alcohols (R-OH)</h2>
+            <div class="definition-box">
+                <strong>📌 Alcohols:</strong> Organic compounds containing the hydroxyl (-OH) functional group attached to a saturated carbon atom. General formula: <strong>CₙH₂ₙ₊₁OH</strong>.
+            </div>
+            
+            <h3>Common Alcohols</h3>
+            <table>
+                <thead><tr><th>Name</th><th>Molecular Formula</th><th>Structural Formula</th><th>Uses</th></tr></thead>
+                <tbody>
+                    <tr><td>Methanol</td><td>CH₃OH</td><td>CH₃-OH</td><td>Solvent, fuel, antifreeze</td></tr>
+                    <tr><td>Ethanol</td><td>C₂H₅OH</td><td>CH₃CH₂-OH</td><td>Alcoholic drinks, fuel, solvent, disinfectant</td></tr>
+                    <tr><td>Propanol</td><td>C₃H₇OH</td><td>CH₃CH₂CH₂-OH</td><td>Disinfectant, solvent</td></tr>
+                    <tr><td>Butanol</td><td>C₄H₉OH</td><td>CH₃CH₂CH₂CH₂-OH</td><td>Paint remover, solvent</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>Preparation of Ethanol</h3>
+            <p><strong>Method 1: Fermentation</strong></p>
+            <div class="formula">C₆H₁₂O₆ →(yeast, 37°C)→ 2C₂H₅OH + 2CO₂</div>
+            <p>Glucose is fermented by yeast enzymes under anaerobic conditions at about 37°C. The ethanol produced is about 12-15% concentration, which can be increased by fractional distillation.</p>
+            
+            <p><strong>Method 2: Hydration of Ethene</strong></p>
+            <div class="formula">C₂H₄ + H₂O →(H₃PO₄, 300°C, 60atm)→ C₂H₅OH</div>
+            
+            <h3>Reactions of Ethanol</h3>
+            <ul>
+                <li><strong>Combustion:</strong> C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O (clean flame)</li>
+                <li><strong>Oxidation:</strong> C₂H₅OH + [O] → CH₃CHO (ethanal) → CH₃COOH (ethanoic acid)</li>
+                <li><strong>Dehydration:</strong> C₂H₅OH →(H₂SO₄, 170°C)→ C₂H₄ + H₂O</li>
+                <li><strong>Esterification:</strong> Reacts with carboxylic acids to form esters</li>
+            </ul>
+            
+            <h2>15.2 Carboxylic Acids (R-COOH)</h2>
+            <div class="definition-box">
+                <strong>📌 Carboxylic Acids:</strong> Organic compounds containing the carboxyl (-COOH) functional group. They are weak acids with the general formula <strong>CₙH₂ₙ₊₁COOH</strong>.
+            </div>
+            
+            <table>
+                <thead><tr><th>Name</th><th>Formula</th><th>Found In</th><th>Uses</th></tr></thead>
+                <tbody>
+                    <tr><td>Methanoic acid</td><td>HCOOH</td><td>Ant stings, nettles</td><td>Preservative, textile processing</td></tr>
+                    <tr><td>Ethanoic acid</td><td>CH₃COOH</td><td>Vinegar (5-8%)</td><td>Food preservative, solvent, vinegar</td></tr>
+                    <tr><td>Propanoic acid</td><td>C₂H₅COOH</td><td>Dairy products</td><td>Food preservative, herbicide</td></tr>
+                    <tr><td>Citric acid</td><td>C₆H₈O₇</td><td>Citrus fruits</td><td>Food flavoring, cleaning agent</td></tr>
+                    <tr><td>Lactic acid</td><td>C₃H₆O₃</td><td>Sour milk, muscles</td><td>Food preservative, cosmetics</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>Properties of Carboxylic Acids</h3>
+            <ul>
+                <li>Weak acids (partially dissociate in water)</li>
+                <li>React with metals to produce H₂ gas</li>
+                <li>React with bases to form salts</li>
+                <li>React with alcohols to form esters (esterification)</li>
+                <li>Have higher boiling points than corresponding alcohols (due to hydrogen bonding)</li>
+            </ul>
+            
+            <div class="example-box">
+                <strong>📐 Reaction with Sodium:</strong><br>
+                2CH₃COOH + 2Na → 2CH₃COONa + H₂<br>
+                (Ethanoic acid + Sodium → Sodium ethanoate + Hydrogen)
+            </div>
+            
+            <h2>15.3 Esters (R-COO-R')</h2>
+            <div class="definition-box">
+                <strong>📌 Esters:</strong> Organic compounds formed by the reaction of a carboxylic acid with an alcohol. They have the general formula <strong>R-COO-R'</strong> and are characterized by their pleasant, fruity smells.
+            </div>
+            
+            <h3>Esterification</h3>
+            <div class="formula">Carboxylic Acid + Alcohol ⇌ Ester + Water</div>
+            <p>The reaction is <strong>reversible</strong> and requires an <strong>acid catalyst</strong> (usually concentrated H₂SO₄).</p>
+            
+            <div class="example-box">
+                <strong>📐 Example 1:</strong><br>
+                CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O<br>
+                Ethanoic acid + Ethanol ⇌ Ethyl ethanoate + Water<br>
+                (Smells like pear drops/nail polish remover)
+            </div>
+            
+            <div class="example-box">
+                <strong>📐 Example 2:</strong><br>
+                HCOOH + CH₃OH ⇌ HCOOCH₃ + H₂O<br>
+                Methanoic acid + Methanol ⇌ Methyl methanoate + Water
+            </div>
+            
+            <h3>Uses of Esters</h3>
+            <ul>
+                <li><strong>Perfumes and fragrances:</strong> Pleasant fruity smells</li>
+                <li><strong>Food flavorings:</strong> Artificial fruit flavors (banana, apple, pineapple)</li>
+                <li><strong>Solvents:</strong> Nail polish remover (ethyl ethanoate), paint thinners</li>
+                <li><strong>Biodiesel:</strong> Methyl esters of fatty acids</li>
+                <li><strong>Plasticizers:</strong> Making plastics flexible</li>
+            </ul>
+            
+            <h2>15.4 Saponification (Soap Making)</h2>
+            <div class="definition-box">
+                <strong>📌 Saponification:</strong> The alkaline hydrolysis of fats and oils (triglycerides) to produce soap (sodium/potassium salts of fatty acids) and glycerol.
+            </div>
+            
+            <div class="formula">Fat/Oil + NaOH → Soap + Glycerol</div>
+            
+            <div class="example-box">
+                <strong>📐 Example:</strong><br>
+                Glyceryl tristearate (fat) + 3NaOH → 3C₁₇H₃₅COONa (sodium stearate - soap) + C₃H₅(OH)₃ (glycerol)
+            </div>
+            
+            <h3>How Soap Works</h3>
+            <p>Soap molecules have a <strong>hydrophilic (water-loving) head</strong> and a <strong>hydrophobic (water-hating) tail</strong>. The hydrophobic tail dissolves in grease/oil, while the hydrophilic head dissolves in water, forming micelles that lift dirt away.</p>
+            
+            <h3>Soap vs Detergent</h3>
+            <table>
+                <thead><tr><th>Soap</th><th>Detergent</th></tr></thead>
+                <tbody>
+                    <tr><td>Made from natural fats/oils</td><td>Made from petroleum products</td></tr>
+                    <tr><td>Forms scum in hard water</td><td>Works well in hard water</td></tr>
+                    <tr><td>Biodegradable</td><td>Some are non-biodegradable</td></tr>
+                    <tr><td>Example: Sodium stearate</td><td>Example: Sodium lauryl sulfate</td></tr>
+                </tbody>
+            </table>
+            
+            <h2>15.5 Polymers and Polymerization</h2>
+            <div class="definition-box">
+                <strong>📌 Polymer:</strong> A large molecule made by joining many small repeating units (monomers) together.<br>
+                <strong>📌 Polymerization:</strong> The process of joining monomers to form a polymer.
+            </div>
+            
+            <h3>Types of Polymerization</h3>
+            <table>
+                <thead><tr><th>Addition Polymerization</th><th>Condensation Polymerization</th></tr></thead>
+                <tbody>
+                    <tr><td>Monomers join directly (C=C double bond opens)</td><td>Monomers join with loss of small molecule (usually H₂O)</td></tr>
+                    <tr><td>No by-product formed</td><td>Small molecule eliminated (H₂O, HCl, NH₃)</td></tr>
+                    <tr><td>Example: Polyethene from ethene</td><td>Example: Nylon, polyester, proteins</td></tr>
+                    <tr><td>n(CH₂=CH₂) → [-CH₂-CH₂-]ₙ</td><td>Diamine + Dicarboxylic acid → Nylon + H₂O</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>Common Polymers and Their Uses</h3>
+            <table>
+                <thead><tr><th>Polymer</th><th>Monomer(s)</th><th>Type</th><th>Uses</th></tr></thead>
+                <tbody>
+                    <tr><td>Polyethene (PE)</td><td>Ethene (C₂H₄)</td><td>Addition</td><td>Plastic bags, bottles, containers</td></tr>
+                    <tr><td>Polypropylene (PP)</td><td>Propene (C₃H₆)</td><td>Addition</td><td>Ropes, carpets, food containers</td></tr>
+                    <tr><td>PVC</td><td>Vinyl chloride</td><td>Addition</td><td>Pipes, window frames, cable insulation</td></tr>
+                    <tr><td>Polystyrene</td><td>Styrene</td><td>Addition</td><td>Packaging, insulation, disposable cups</td></tr>
+                    <tr><td>Nylon</td><td>Diamine + Diacid</td><td>Condensation</td><td>Clothing, ropes, parachutes</td></tr>
+                    <tr><td>Polyester (Terylene)</td><td>Diol + Diacid</td><td>Condensation</td><td>Clothing, bottles, films</td></tr>
+                    <tr><td>Starch</td><td>Glucose</td><td>Natural</td><td>Energy storage in plants</td></tr>
+                    <tr><td>Protein</td><td>Amino acids</td><td>Natural</td><td>Muscles, enzymes, hair, nails</td></tr>
+                    <tr><td>DNA</td><td>Nucleotides</td><td>Natural</td><td>Genetic information storage</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="key-point">
+                <strong>🧪 Thermosoftening vs Thermosetting:</strong><br>
+                • <strong>Thermosoftening (Thermoplastic):</strong> Softens when heated, can be remolded (e.g., polyethene, PVC)<br>
+                • <strong>Thermosetting:</strong> Does NOT soften when heated, cannot be remolded (e.g., bakelite, melamine)
+            </div>
+            
+            <h2>15.6 Proteins and Amino Acids</h2>
+            <div class="definition-box">
+                <strong>📌 Amino Acids:</strong> Building blocks of proteins. Contain both -NH₂ (amine) and -COOH (carboxyl) groups. There are 20 naturally occurring amino acids.
+            </div>
+            <div class="formula">H₂N-CHR-COOH</div>
+            <p>Amino acids link through <strong>peptide bonds</strong> (-CONH-) to form proteins (polypeptides).</p>
+            
+            <!-- Chapter Summary -->
+            <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h3 style="color: #1a5c2a; margin-bottom: 1rem;">📝 Chapter 15 Summary</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Alcohols</strong> contain -OH group; ethanol (C₂H₅OH) made by fermentation</li>
+                    <li><strong>Carboxylic acids</strong> contain -COOH; ethanoic acid (CH₃COOH) is vinegar</li>
+                    <li><strong>Esters</strong> (R-COO-R') formed by acid + alcohol; have fruity smells; used in perfumes</li>
+                    <li><strong>Saponification:</strong> Fat + NaOH → Soap + Glycerol</li>
+                    <li><strong>Addition polymerization:</strong> Monomers join directly (polyethene from ethene)</li>
+                    <li><strong>Condensation polymerization:</strong> Monomers join with loss of H₂O (nylon, polyester)</li>
+                    <li><strong>Natural polymers:</strong> Starch, protein, DNA</li>
+                </ul>
+            </div>
+            
+            <div class="key-point" style="margin-top: 1rem;">
+                <strong>🎯 WAEC/NECO Tip:</strong> Esterification equations, soap making (saponification), and polymer types (addition vs condensation) are tested every year! Know your examples.
+            </div>
+            
+        </article>
+        
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <a href="chem-ch14-water.html">← Previous: Chapter 14 - Water & Solutions</a>
+            <a href="chem-ch16-nuclear.html" class="next-chapter">Next: Chapter 16 - Nuclear Chemistry →</a>
+        </div>
+    </main>
+    
+    <!-- PREMIUM SIDEBAR -->
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard">
+            <h3 style="color: #1a5c2a; margin-bottom: 1rem;">👑 ChemistryMaster Premium</h3>
+            <p style="margin-bottom: 0.5rem; color: #555;">Complete SS1-SS3 Chemistry</p>
+            <div class="price-naira">₦1,500 <small>/ one-time</small></div>
+            <p style="font-size: 0.85rem; color: #00a86b; margin-top: -0.5rem;">⭐ Lifetime access • No subscription</p>
+            <ul style="margin: 1rem 0 1.5rem 1.5rem; list-style: none;">
+                <li style="padding: 0.3rem 0;">✅ All 20 Chapters</li>
+                <li style="padding: 0.3rem 0;">✅ Unlimited AI Tutor</li>
+                <li style="padding: 0.3rem 0;">✅ 500+ Practice Questions</li>
+                <li style="padding: 0.3rem 0;">✅ WAEC/NECO Exam Prep</li>
+                <li style="padding: 0.3rem 0;">✅ Downloadable PDF Notes</li>
+            </ul>
+            <button class="btn-premium" id="upgradeBtn" onclick="openPaymentModal()">💳 Pay with Opay</button>
+            <button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Back to Library</button>
+        </div>
+    </aside>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <h3>🟢 Opay Bank Transfer</h3>
+        <p>Amount: <strong>₦1,500</strong></p>
+        
+        <div class="account-details">
+            <p><strong>🏦 Bank:</strong> Opay (Paycom)</p>
+            <p><strong>📱 Account Number:</strong> <span id="accountNumber">8052059012</span> 
+                <button class="copy-btn" onclick="copyAccountNumber()">Copy</button>
+            </p>
+            <p><strong>👤 Account Name:</strong> Alade Timothy Olarewaju</p>
+        </div>
+        
+        <div class="info-note">
+            <strong>📋 Important:</strong> Premium access is <strong>NOT automatic</strong>. After payment, submit your details. Access will be granted after we verify the payment.
+        </div>
+        
+        <input type="text" id="payerName" placeholder="Your Full Name (as on bank account)">
+        <input type="email" id="payerEmail" placeholder="Your Email">
+        <input type="text" id="transactionRef" placeholder="Opay Transaction Reference/Session ID">
+        <input type="text" id="paymentAmount" placeholder="Amount Paid (₦)" value="1500">
+        
+        <button class="btn-premium" onclick="submitPaymentRequest()">📤 Submit Payment for Verification</button>
+        
+        <div id="paymentStatus" class="payment-status"></div>
+        
+        <button class="close-modal" onclick="closePaymentModal()">Cancel</button>
+        <p style="font-size: 11px; margin-top: 15px; color: #999;">Premium activates within 24 hours after payment confirmation.</p>
+    </div>
+</div>
+
+<!-- AI TUTOR WIDGET -->
+<div class="ai-widget" id="aiWidget">
+    <div class="ai-header">
+        <span>🧪 Chemistry AI Tutor</span>
+        <span onclick="closeAI()">✕</span>
+    </div>
+    <div class="ai-body" id="aiBody">
+        <div class="message ai-msg"><strong>👋 Hello!</strong> I'm your Chemistry AI tutor. Ask me about organic chemistry!</div>
+        <div class="message ai-msg"><strong>Try:</strong> "What is esterification?" or "How is soap made?" or "Types of polymers"</div>
+        <div id="chatMessages"></div>
+    </div>
+    <div class="chips">
+        <span class="chip" onclick="askThis('What is esterification?')">🍍 Esters</span>
+        <span class="chip" onclick="askThis('How is soap made?')">🧼 Saponification</span>
+        <span class="chip" onclick="askThis('Types of polymers')">🔗 Polymers</span>
+        <span class="chip" onclick="askThis('Formula of ethanol')">🍺 Ethanol</span>
+    </div>
+    <div class="ai-input">
+        <input type="text" id="aiInput" placeholder="Ask any chemistry question..." onkeypress="if(event.key==='Enter') askAI()">
+        <button onclick="askAI()">📤 Send</button>
+    </div>
+</div>
+
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+
+<footer>
+    <p>© 2024 ChemistryMaster.ng — Making quality chemistry education accessible to every Nigerian student.</p>
+    <p style="margin-top: 0.5rem;">📧 contact@chemistrymaster.ng | 📞 +234 800 CHEMISTRY</p>
+</footer>
+
+<script>
+    // =============================================
+    // OPAY ACCOUNT & PAYMENT
+    // =============================================
+    const OPAY_ACCOUNT = { bank: "Opay (Paycom)", accountNumber: "8052059012", accountName: "Alade Timothy Olarewaju", amount: 1500 };
+    let paymentRequests = JSON.parse(localStorage.getItem('chem_payment_requests')) || [];
+    
+    // =============================================
+    // AUTHENTICATION
+    // =============================================
+    let currentUser = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if (!currentUser) window.location.href = 'chemistry-login.html';
+    
+    let users = JSON.parse(localStorage.getItem('chemistry_users')) || [];
+    let userData = users.find(u => u.id === currentUser.id);
+    if (!userData) { sessionStorage.removeItem('chemistry_currentUser'); window.location.href = 'chemistry-login.html'; }
+    
+    let isPremium = userData.premium || false;
+    currentUser.premium = isPremium;
+    sessionStorage.setItem('chemistry_currentUser', JSON.stringify(currentUser));
+    
+    // =============================================
+    // UI UPDATES
+    // =============================================
+    function updateUI() {
+        if (isPremium) {
+            document.getElementById('premiumBadge').textContent = '👑 Premium Active';
+            document.getElementById('premiumBadge').style.background = '#00a86b';
+            const premiumCard = document.getElementById('premiumCard');
+            if (premiumCard) {
+                premiumCard.innerHTML = `
+                    <h3 style="color:#1a5c2a; margin-bottom:1rem;">👑 Premium Active</h3>
+                    <p style="margin-bottom:1rem;">✅ You have full access to all 20 chapters and unlimited AI!</p>
+                    <button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Back to Library</button>
+                `;
+            }
+        }
+    }
+    
+    // =============================================
+    // PAYMENT FUNCTIONS
+    // =============================================
+    function copyAccountNumber() { navigator.clipboard.writeText(OPAY_ACCOUNT.accountNumber); alert('✅ Account number copied: ' + OPAY_ACCOUNT.accountNumber); }
+    
+    function openPaymentModal() {
+        if (isPremium) { alert('You are already a Premium member!'); return; }
+        document.getElementById('payerName').value = currentUser.name || '';
+        document.getElementById('payerEmail').value = currentUser.email || '';
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+    
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+        document.getElementById('paymentStatus').style.display = 'none';
+        document.getElementById('paymentStatus').className = 'payment-status';
+    }
+    
+    function submitPaymentRequest() {
+        const name = document.getElementById('payerName').value.trim();
+        const email = document.getElementById('payerEmail').value.trim();
+        const ref = document.getElementById('transactionRef').value.trim();
+        const amount = document.getElementById('paymentAmount').value.trim();
+        const statusDiv = document.getElementById('paymentStatus');
+        
+        if (!name || !email) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-error'; statusDiv.innerHTML = '❌ Please enter your name and email.'; return; }
+        if (!ref) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-error'; statusDiv.innerHTML = '❌ Please enter the Opay transaction reference.'; return; }
+        if (amount != OPAY_ACCOUNT.amount) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-error'; statusDiv.innerHTML = `❌ Payment amount must be exactly ₦${OPAY_ACCOUNT.amount}.`; return; }
+        
+        const existingRequest = paymentRequests.find(r => r.reference === ref);
+        if (existingRequest) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-pending'; statusDiv.innerHTML = '⏳ This payment reference has already been submitted and is pending verification.'; return; }
+        
+        paymentRequests.push({
+            id: 'PAY_' + Date.now(), userId: currentUser.id, userName: name, userEmail: email,
+            reference: ref, amount: parseFloat(amount), status: 'pending',
+            submittedAt: new Date().toISOString(), verifiedAt: null
+        });
+        localStorage.setItem('chem_payment_requests', JSON.stringify(paymentRequests));
+        
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'payment-status status-pending';
+        statusDiv.innerHTML = `⏳ Payment submitted for verification!<br><br><strong>Reference:</strong> ${ref}<br><strong>Amount:</strong> ₦${amount}<br><br>Your premium access will be activated after we confirm your payment (usually within 24 hours).<br><br><strong>Note:</strong> Access is NOT immediate. We verify every payment manually.`;
+    }
+    
+    // =============================================
+    // AI FUNCTIONS
+    // =============================================
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = `message ${sender}-msg`;
+        div.innerHTML = text;
+        document.getElementById('chatMessages').appendChild(div);
+        document.getElementById('aiBody').scrollTop = document.getElementById('aiBody').scrollHeight;
+    }
+    
+    function getAIResponse(question) {
+        const q = question.toLowerCase().trim();
+        
+        if (q.includes('time')) return `🕐 ${new Date().toLocaleTimeString()} | ${new Date().toDateString()}`;
+        
+        if (q.includes('esterification') || q.includes('ester')) {
+            return '🍍 <strong>Esterification:</strong> Carboxylic Acid + Alcohol ⇌ Ester + Water (acid catalyst).<br><br>Example: CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O<br>Ethanoic acid + Ethanol → Ethyl ethanoate + Water<br><br>Esters have fruity smells and are used in perfumes, flavorings, and solvents.';
+        }
+        
+        if (q.includes('soap') || q.includes('saponification')) {
+            return '🧼 <strong>Saponification:</strong> Alkaline hydrolysis of fats/oils to produce soap and glycerol.<br><br>Fat/Oil + NaOH → Soap + Glycerol<br><br>Soap molecules have a hydrophilic head and hydrophobic tail, allowing them to dissolve both water and oil/grease.';
+        }
+        
+        if (q.includes('polymer') && (q.includes('type') || q.includes('addition') || q.includes('condensation'))) {
+            return '🔗 <strong>Types of Polymerization:</strong><br><br><strong>Addition:</strong> Monomers join directly (double bond opens). No by-product. Example: Polyethene from ethene.<br><br><strong>Condensation:</strong> Monomers join with loss of small molecule (usually H₂O). Example: Nylon, polyester.';
+        }
+        
+        if (q.includes('alcohol') || q.includes('ethanol')) {
+            return '🍺 <strong>Ethanol (C₂H₅OH):</strong><br>• Made by fermentation: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂<br>• Or hydration of ethene: C₂H₄ + H₂O → C₂H₅OH<br>• Uses: Fuel, solvent, disinfectant, alcoholic drinks';
+        }
+        
+        if (q.includes('carboxylic acid')) {
+            return '🧪 <strong>Carboxylic Acids (R-COOH):</strong><br>• Weak acids with -COOH group<br>• Examples: Methanoic acid (ant stings), Ethanoic acid (vinegar)<br>• React with alcohols to form esters';
+        }
+        
+        if (q.includes('polymer') && !q.includes('type')) {
+            return '🔗 <strong>Polymers:</strong> Large molecules made from repeating monomers.<br><br><strong>Common Polymers:</strong><br>• Polyethene (plastic bags)<br>• PVC (pipes)<br>• Nylon (clothing)<br>• Polyester (bottles)<br>• Natural: Starch, Protein, DNA';
+        }
+        
+        if (q.includes('hello') || q.includes('hi')) {
+            return `👋 Hello ${currentUser.name.split(' ')[0]}! I'm your Chemistry AI tutor. Ask me about esters, soap making, polymers, or alcohols!`;
+        }
+        
+        return `🤔 I'm here to help with Organic Chemistry II! Try asking:<br>• "What is esterification?"<br>• "How is soap made?"<br>• "Types of polymers"<br>• "Formula of ethanol"<br>• "What are carboxylic acids?"`;
+    }
+    
+    function askAI() {
+        const input = document.getElementById('aiInput');
+        const q = input.value.trim();
+        if (!q) return;
+        addMessage(q, 'user');
+        input.value = '';
+        setTimeout(() => addMessage(getAIResponse(q), 'ai'), 500);
+    }
+    
+    function askThis(q) { document.getElementById('aiInput').value = q; askAI(); }
+    function closeAI() { document.getElementById('aiWidget').style.display = 'none'; document.getElementById('floatingBtn').style.display = 'flex'; }
+    function openAI() { document.getElementById('aiWidget').style.display = 'block'; document.getElementById('floatingBtn').style.display = 'none'; }
+    function logout() { sessionStorage.removeItem('chemistry_currentUser'); window.location.href = 'chemistry-login.html'; }
+    
+    // Expose functions
+    window.askAI = askAI;
+    window.askThis = askThis;
+    window.closeAI = closeAI;
+    window.openAI = openAI;
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
+    window.submitPaymentRequest = submitPaymentRequest;
+    window.copyAccountNumber = copyAccountNumber;
+    window.logout = logout;
+    
+    // Initialize
+    updateUI();
+</script>
+</body>
+</html>

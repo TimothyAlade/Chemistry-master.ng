@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Metals & Metallurgy | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; }
+        th { background: #1a5c2a; color: white; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-body { padding: 15px; height: 280px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><h1>🧪 ChemistryMaster.ng</h1><span>Chapter 12: Metals & Metallurgy</span></div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb"><a href="chemistry-index.html">Library</a> › <strong>Chapter 12: Metals & Metallurgy</strong></div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header"><h1>Chapter 12: Metals & Metallurgy</h1><div class="chapter-meta"><span>📗 SS2 Second Term</span><span>⏱️ Reading: 40 mins</span></div></div>
+        <div class="learning-objectives"><h3>🎯 Learning Objectives</h3><ul><li>Understand the reactivity series of metals</li><li>Describe extraction of iron, aluminum, and copper</li><li>Explain alloy formation</li><li>Understand corrosion and its prevention</li></ul></div>
+        
+        <article class="chapter-content">
+            <h2>12.1 Reactivity Series</h2>
+            <div class="definition-box"><strong>📌 Reactivity Series:</strong> K > Na > Ca > Mg > Al > Zn > Fe > Sn > Pb > (H) > Cu > Hg > Ag > Au > Pt</div>
+            <div class="key-point"><strong>💡 Memory Trick:</strong> "Kings Never Carry Makeup After Zebra In The Lead House, Come Here Silver And Gold Please"</div>
+            
+            <h2>12.2 Extraction of Iron (Blast Furnace)</h2>
+            <p><strong>Raw Materials:</strong> Iron ore (Fe₂O₃), Coke (C), Limestone (CaCO₃)</p>
+            <p><strong>Reactions:</strong></p><ul><li>C + O₂ → CO₂ (coke burns)</li><li>CO₂ + C → 2CO (reducing agent)</li><li>Fe₂O₃ + 3CO → 2Fe + 3CO₂ (iron reduced)</li><li>CaCO₃ → CaO + CO₂ (limestone decomposes)</li><li>CaO + SiO₂ → CaSiO₃ (slag formation)</li></ul>
+            
+            <h2>12.3 Extraction of Aluminum (Hall-Héroult Process)</h2>
+            <p>Aluminum extracted by <strong>electrolysis</strong> of molten alumina (Al₂O₃) dissolved in cryolite (Na₃AlF₆).</p>
+            
+            <h2>12.4 Alloys</h2>
+            <table><tr><th>Alloy</th><th>Composition</th><th>Use</th></tr><tr><td>Steel</td><td>Fe + C</td><td>Construction, tools</td></tr><tr><td>Brass</td><td>Cu + Zn</td><td>Musical instruments</td></tr><tr><td>Bronze</td><td>Cu + Sn</td><td>Statues, coins</td></tr><tr><td>Duralumin</td><td>Al + Cu + Mg</td><td>Aircraft bodies</td></tr><tr><td>Solder</td><td>Pb + Sn</td><td>Joining metals</td></tr></table>
+            
+            <h2>12.5 Corrosion and Prevention</h2>
+            <div class="definition-box"><strong>📌 Rusting:</strong> Fe + O₂ + H₂O → Fe₂O₃·xH₂O (hydrated iron(III) oxide)</div>
+            <p><strong>Prevention Methods:</strong></p><ul><li>Painting/oiling</li><li>Galvanizing (coating with zinc)</li><li>Sacrificial protection</li><li>Alloying (stainless steel)</li><li>Electroplating</li></ul>
+            
+            <div style="background:#e8f5e9; padding:1.5rem; border-radius:12px; margin-top:2rem;"><h3 style="color:#1a5c2a;">📝 Chapter 12 Summary</h3><ul><li>Reactivity: K > Na > Ca > Mg > Al > Zn > Fe > Cu > Au</li><li>Iron: Blast furnace (coke, limestone, iron ore)</li><li>Aluminum: Electrolysis of Al₂O₃ in cryolite</li><li>Rusting needs O₂ + H₂O; prevented by painting, galvanizing</li></ul></div>
+        </article>
+        
+        <div class="chapter-nav"><a href="chem-ch11-electro.html">← Previous: Chapter 11</a><a href="chem-ch13-nonmetals.html" class="next-chapter">Next: Chapter 13 →</a></div>
+    </main>
+    
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard"><h3 style="color:#1a5c2a;">👑 ChemistryMaster Premium</h3><div class="price-naira">₦1,500 <small>one-time</small></div><ul style="margin:1rem 0 1.5rem 1.5rem;"><li>✅ All 20 Chapters</li><li>✅ Unlimited AI Tutor</li><li>✅ WAEC/NECO Prep</li></ul><button class="btn-premium" onclick="openPaymentModal()">💳 Pay with Opay</button><button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Library</button></div>
+    </aside>
+</div>
+
+<div class="ai-widget" id="aiWidget"><div class="ai-header"><span>🧪 Chemistry AI</span><span onclick="closeAI()">✕</span></div><div class="ai-body" id="aiBody"><div class="message ai-msg"><strong>👋 Hello!</strong> Ask me about metals!</div><div id="chatMessages"></div></div><div class="chips"><span class="chip" onclick="askThis('Reactivity series')">📊 Reactivity</span><span class="chip" onclick="askThis('Blast furnace reactions')">🔥 Iron</span><span class="chip" onclick="askThis('How to prevent rusting?')">🛡️ Rust</span></div><div class="ai-input"><input type="text" id="aiInput" placeholder="Ask me..." onkeypress="if(event.key==='Enter') askAI()"><button onclick="askAI()">Send</button></div></div>
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+<footer><p>© 2024 ChemistryMaster.ng</p></footer>
+
+<script>
+    let user = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if(!user) window.location.href='chemistry-login.html';
+    let users = JSON.parse(localStorage.getItem('chemistry_users'))||[];
+    let uData = users.find(u=>u.id===user.id);
+    let premium = uData.premium||false;
+    if(premium){ document.getElementById('premiumBadge').textContent='👑 Premium'; document.getElementById('premiumBadge').style.background='#00a86b'; }
+    
+    function addMsg(t,s){ let d=document.createElement('div'); d.className=`message ${s}-msg`; d.innerHTML=t; document.getElementById('chatMessages').appendChild(d); document.getElementById('aiBody').scrollTop=document.getElementById('aiBody').scrollHeight; }
+    function getAI(q){
+        q=q.toLowerCase();
+        if(q.includes('reactivity')) return '📊 Reactivity: K>Na>Ca>Mg>Al>Zn>Fe>Sn>Pb>(H)>Cu>Hg>Ag>Au>Pt. More reactive metals displace less reactive ones.';
+        if(q.includes('blast furnace')||q.includes('iron')) return '🔥 Iron extraction: Fe₂O₃+3CO→2Fe+3CO₂. Uses coke, limestone, iron ore. Limestone removes impurities as slag.';
+        if(q.includes('aluminum')||q.includes('aluminium')) return '🔩 Aluminum: Electrolysis of Al₂O₃ dissolved in cryolite (Na₃AlF₆) at 950°C. Hall-Héroult process.';
+        if(q.includes('alloy')) return '🔗 Alloys: Steel (Fe+C), Brass (Cu+Zn), Bronze (Cu+Sn), Duralumin (Al+Cu+Mg), Solder (Pb+Sn).';
+        if(q.includes('rust')||q.includes('corrosion')) return '🛡️ Rust prevention: Painting, oiling, galvanizing (zinc coating), sacrificial protection, alloying (stainless steel).';
+        if(q.includes('hello')||q.includes('hi')) return '👋 Hello! Ask me about metals, extraction, or alloys!';
+        return '🤔 Try: "Reactivity series" or "Blast furnace" or "How to prevent rusting?"';
+    }
+    function askAI(){ let i=document.getElementById('aiInput'), q=i.value.trim(); if(!q) return; addMsg(q,'user'); i.value=''; setTimeout(()=>addMsg(getAI(q),'ai'),500); }
+    function askThis(q){ document.getElementById('aiInput').value=q; askAI(); }
+    function closeAI(){ document.getElementById('aiWidget').style.display='none'; document.getElementById('floatingBtn').style.display='flex'; }
+    function openAI(){ document.getElementById('aiWidget').style.display='block'; document.getElementById('floatingBtn').style.display='none'; }
+    function openPaymentModal(){ if(premium){ alert('Already Premium!'); return; } alert('Pay ₦1,500 to Opay: 8052059012'); }
+    function logout(){ sessionStorage.removeItem('chemistry_currentUser'); window.location.href='chemistry-login.html'; }
+    window.askAI=askAI; window.askThis=askThis; window.closeAI=closeAI; window.openAI=openAI;
+    window.openPaymentModal=openPaymentModal; window.logout=logout;
+</script>
+</body>
+</html>

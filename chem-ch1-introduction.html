@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to Chemistry | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .nav-links .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .learning-objectives h3 { color: #1a5c2a; margin-bottom: 0.8rem; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .chapter-content h3 { color: #0d3b1a; margin: 1.8rem 0 1rem; font-size: 1.3rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .definition-box strong { color: #1a5c2a; }
+        .example-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #1a5c2a; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; height: fit-content; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; }
+        .chapter-nav a:hover { background: #e8f5e9; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+
+        /* Payment Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 20px; padding: 30px; width: 450px; text-align: center; }
+        .modal-content h3 { color: #1a5c2a; margin-bottom: 20px; }
+        .modal-content input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; }
+        .modal-content .account-details { background: #e8f5e9; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left; }
+        .copy-btn { background: #1a5c2a; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .close-modal { background: #ddd; color: #333; padding: 12px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .payment-status { margin-top: 15px; padding: 10px; border-radius: 8px; display: none; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .info-note { background: #e8f5e9; padding: 10px; border-radius: 8px; margin: 15px 0; font-size: 13px; }
+
+        /* AI Widget */
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-header span { cursor: pointer; font-size: 20px; }
+        .ai-body { padding: 15px; height: 300px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; flex-wrap: wrap; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .chip:hover { background: #1a5c2a; color: white; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .ai-widget { width: 95%; right: 2.5%; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <h1>🧪 ChemistryMaster.ng</h1>
+        <span>Chapter 1: Introduction to Chemistry</span>
+    </div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb">
+    <a href="chemistry-index.html">Library</a> › <a href="chemistry-index.html">SS1 Chemistry</a> › <strong>Chapter 1: Introduction to Chemistry</strong>
+</div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header">
+            <h1>Chapter 1: Introduction to Chemistry</h1>
+            <div class="chapter-meta">
+                <span>📘 SS1 First Term</span>
+                <span>⏱️ Reading: 25 mins</span>
+                <span>📖 Sections: 5</span>
+            </div>
+        </div>
+        
+        <div class="learning-objectives">
+            <h3>🎯 Learning Objectives</h3>
+            <p>By the end of this chapter, you should be able to:</p>
+            <ul>
+                <li>Define chemistry and explain its scope</li>
+                <li>Identify and describe the main branches of chemistry</li>
+                <li>Explain the importance of chemistry in everyday life</li>
+                <li>Describe the scientific method</li>
+                <li>Understand laboratory safety rules</li>
+            </ul>
+        </div>
+        
+        <article class="chapter-content">
+            
+            <h2>1.1 What is Chemistry?</h2>
+            <div class="definition-box">
+                <strong>📌 Definition:</strong> Chemistry is the branch of science that studies the composition, structure, properties, and changes of matter. It deals with how substances interact, combine, and change.
+            </div>
+            <p>The word <strong>"Chemistry"</strong> comes from the ancient practice of <strong>alchemy</strong>. Chemistry is often called the <strong>"central science"</strong> because it connects physics with biology, medicine, and engineering.</p>
+            
+            <p>Chemistry answers questions like:</p>
+            <ul>
+                <li>What is water made of?</li>
+                <li>Why does iron rust?</li>
+                <li>How do batteries produce electricity?</li>
+                <li>What makes food cook faster with salt?</li>
+                <li>How are medicines made?</li>
+            </ul>
+            
+            <h2>1.2 Branches of Chemistry</h2>
+            <p>Chemistry is broadly divided into several branches:</p>
+            
+            <table>
+                <thead><tr><th>Branch</th><th>What It Studies</th><th>Examples</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Organic Chemistry</strong></td><td>Carbon-containing compounds</td><td>Plastics, petrol, drugs, proteins</td></tr>
+                    <tr><td><strong>Inorganic Chemistry</strong></td><td>Non-carbon compounds</td><td>Metals, salts, minerals, acids</td></tr>
+                    <tr><td><strong>Physical Chemistry</strong></td><td>Physics of chemical systems</td><td>Thermodynamics, kinetics, electrochemistry</td></tr>
+                    <tr><td><strong>Analytical Chemistry</strong></td><td>Analysis and measurement</td><td>Water quality testing, drug testing</td></tr>
+                    <tr><td><strong>Biochemistry</strong></td><td>Chemical processes in living things</td><td>DNA, enzymes, hormones, metabolism</td></tr>
+                    <tr><td><strong>Industrial Chemistry</strong></td><td>Large-scale chemical production</td><td>Fertilizers, cement, paints</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="key-point">
+                <strong>💡 Remember:</strong> Organic = Carbon compounds | Inorganic = Everything else
+            </div>
+            
+            <h2>1.3 Importance of Chemistry in Everyday Life</h2>
+            
+            <h3>🏠 At Home</h3>
+            <ul>
+                <li><strong>Cooking:</strong> Chemical reactions occur when food is heated</li>
+                <li><strong>Cleaning:</strong> Soaps and detergents work through chemical processes</li>
+                <li><strong>Food preservation:</strong> Salt, sugar, and refrigeration prevent spoilage</li>
+            </ul>
+            
+            <h3>🏥 Medicine</h3>
+            <ul>
+                <li><strong>Drugs:</strong> Paracetamol, antibiotics, antimalarials</li>
+                <li><strong>Vaccines:</strong> Chemical formulations that prevent diseases</li>
+                <li><strong>Diagnosis:</strong> Blood tests, urine analysis</li>
+            </ul>
+            
+            <h3>🌾 Agriculture</h3>
+            <ul>
+                <li><strong>Fertilizers:</strong> NPK (Nitrogen, Phosphorus, Potassium)</li>
+                <li><strong>Pesticides:</strong> Protect crops from insects and diseases</li>
+                <li><strong>Herbicides:</strong> Control unwanted plants</li>
+            </ul>
+            
+            <h3>🏭 Industry</h3>
+            <ul>
+                <li><strong>Plastics:</strong> Polyethylene, PVC, nylon</li>
+                <li><strong>Textiles:</strong> Dyes, synthetic fibers</li>
+                <li><strong>Construction:</strong> Cement, paints, glass</li>
+                <li><strong>Energy:</strong> Petroleum refining, batteries</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>💡 Key Point:</strong> Chemistry is everywhere! From the food you eat to the phone in your hand, chemistry makes modern life possible.
+            </div>
+            
+            <h2>1.4 The Scientific Method</h2>
+            <p>Chemistry, like all sciences, follows a systematic approach called the <strong>scientific method</strong>:</p>
+            
+            <table>
+                <thead><tr><th>Step</th><th>Description</th><th>Example</th></tr></thead>
+                <tbody>
+                    <tr><td>1. <strong>Observation</strong></td><td>Notice a phenomenon</td><td>Iron nails left outside rust</td></tr>
+                    <tr><td>2. <strong>Question</strong></td><td>Ask why/how</td><td>Why does iron rust?</td></tr>
+                    <tr><td>3. <strong>Hypothesis</strong></td><td>Propose an explanation</td><td>Rusting requires air and water</td></tr>
+                    <tr><td>4. <strong>Experiment</strong></td><td>Test the hypothesis</td><td>Place nails in different conditions</td></tr>
+                    <tr><td>5. <strong>Analysis</strong></td><td>Examine results</td><td>Nails rust only with both air and water</td></tr>
+                    <tr><td>6. <strong>Conclusion</strong></td><td>Accept or reject hypothesis</td><td>Rusting needs O₂ and H₂O</td></tr>
+                </tbody>
+            </table>
+            
+            <h2>1.5 Laboratory Safety Rules</h2>
+            <p>When working in a chemistry laboratory, always follow these safety rules:</p>
+            <ul>
+                <li>👁️ <strong>Wear safety goggles</strong> to protect your eyes</li>
+                <li>🧥 <strong>Wear a lab coat</strong> to protect your clothes and skin</li>
+                <li>🚫 <strong>Never eat or drink</strong> in the laboratory</li>
+                <li>👃 <strong>Never smell chemicals directly</strong> — waft the fumes toward you</li>
+                <li>⚠️ <strong>Read labels carefully</strong> before using any chemical</li>
+                <li>🧤 <strong>Wear gloves</strong> when handling corrosive substances</li>
+                <li>🧯 <strong>Know where the fire extinguisher is</strong></li>
+                <li>🧹 <strong>Clean up spills immediately</strong></li>
+            </ul>
+            
+            <div class="definition-box">
+                <strong>⚠️ Common Lab Hazard Symbols:</strong><br>
+                ☠️ Toxic/Poisonous | 🔥 Flammable | 💥 Explosive | ⚡ Corrosive | ☢️ Radioactive | ❗ Irritant
+            </div>
+            
+            <!-- Chapter Summary -->
+            <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                <h3 style="color: #1a5c2a; margin-bottom: 1rem;">📝 Chapter 1 Summary</h3>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Chemistry</strong> is the study of matter, its properties, and changes</li>
+                    <li><strong>6 main branches:</strong> Organic, Inorganic, Physical, Analytical, Biochemistry, Industrial</li>
+                    <li>Chemistry is essential in <strong>medicine, agriculture, industry, and homes</strong></li>
+                    <li>The <strong>scientific method</strong> provides a systematic approach to discovery</li>
+                    <li><strong>Lab safety</strong> is crucial — always follow safety rules</li>
+                </ul>
+            </div>
+            
+            <div class="key-point" style="margin-top: 1rem;">
+                <strong>🎯 WAEC/NECO Tip:</strong> Questions about branches of chemistry, scientific method, and lab safety appear frequently! Know the differences between organic and inorganic chemistry.
+            </div>
+            
+        </article>
+        
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <a href="chemistry-index.html">← Back to Library</a>
+            <a href="chem-ch2-matter.html" class="next-chapter">Next: Chapter 2 - Matter →</a>
+        </div>
+    </main>
+    
+    <!-- PREMIUM SIDEBAR -->
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard">
+            <h3 style="color: #1a5c2a; margin-bottom: 1rem;">👑 ChemistryMaster Premium</h3>
+            <p style="margin-bottom: 0.5rem; color: #555;">Complete SS1-SS3 Chemistry</p>
+            <div class="price-naira">₦1,500 <small>/ one-time</small></div>
+            <p style="font-size: 0.85rem; color: #00a86b; margin-top: -0.5rem;">⭐ Lifetime access • No subscription</p>
+            <ul style="margin: 1rem 0 1.5rem 1.5rem; list-style: none;">
+                <li style="padding: 0.3rem 0;">✅ All 20 Chapters</li>
+                <li style="padding: 0.3rem 0;">✅ Unlimited AI Tutor</li>
+                <li style="padding: 0.3rem 0;">✅ 500+ Practice Questions</li>
+                <li style="padding: 0.3rem 0;">✅ WAEC/NECO Exam Prep</li>
+                <li style="padding: 0.3rem 0;">✅ Downloadable PDF Notes</li>
+            </ul>
+            <button class="btn-premium" id="upgradeBtn" onclick="openPaymentModal()">💳 Pay with Opay</button>
+            <button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Back to Library</button>
+        </div>
+    </aside>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <h3>🟢 Opay Bank Transfer</h3>
+        <p>Amount: <strong>₦1,500</strong></p>
+        
+        <div class="account-details">
+            <p><strong>🏦 Bank:</strong> Opay (Paycom)</p>
+            <p><strong>📱 Account Number:</strong> <span id="accountNumber">8052059012</span> 
+                <button class="copy-btn" onclick="copyAccountNumber()">Copy</button>
+            </p>
+            <p><strong>👤 Account Name:</strong> Alade Timothy Olarewaju</p>
+        </div>
+        
+        <div class="info-note">
+            <strong>📋 Important:</strong> Premium access is <strong>NOT automatic</strong>. After payment, submit your details. Access will be granted after we verify the payment.
+        </div>
+        
+        <input type="text" id="payerName" placeholder="Your Full Name (as on bank account)">
+        <input type="email" id="payerEmail" placeholder="Your Email">
+        <input type="text" id="transactionRef" placeholder="Opay Transaction Reference/Session ID">
+        <input type="text" id="paymentAmount" placeholder="Amount Paid (₦)" value="1500">
+        
+        <button class="btn-premium" onclick="submitPaymentRequest()">📤 Submit Payment for Verification</button>
+        
+        <div id="paymentStatus" class="payment-status"></div>
+        
+        <button class="close-modal" onclick="closePaymentModal()">Cancel</button>
+        <p style="font-size: 11px; margin-top: 15px; color: #999;">Premium activates within 24 hours after payment confirmation.</p>
+    </div>
+</div>
+
+<!-- AI TUTOR WIDGET -->
+<div class="ai-widget" id="aiWidget">
+    <div class="ai-header">
+        <span>🧪 Chemistry AI Tutor</span>
+        <span onclick="closeAI()">✕</span>
+    </div>
+    <div class="ai-body" id="aiBody">
+        <div class="message ai-msg"><strong>👋 Hello!</strong> I'm your Chemistry AI tutor. Ask me anything!</div>
+        <div class="message ai-msg"><strong>Try:</strong> "What is chemistry?" or "Branches of chemistry" or "Lab safety rules"</div>
+        <div id="chatMessages"></div>
+    </div>
+    <div class="chips">
+        <span class="chip" onclick="askThis('What is chemistry?')">🧪 Chemistry</span>
+        <span class="chip" onclick="askThis('Branches of chemistry')">📚 Branches</span>
+        <span class="chip" onclick="askThis('Lab safety rules')">⚠️ Safety</span>
+        <span class="chip" onclick="askThis('What is the scientific method?')">🔬 Method</span>
+    </div>
+    <div class="ai-input">
+        <input type="text" id="aiInput" placeholder="Ask any chemistry question..." onkeypress="if(event.key==='Enter') askAI()">
+        <button onclick="askAI()">📤 Send</button>
+    </div>
+</div>
+
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+
+<footer>
+    <p>© 2024 ChemistryMaster.ng — Making quality chemistry education accessible to every Nigerian student.</p>
+    <p style="margin-top: 0.5rem;">📧 contact@chemistrymaster.ng | 📞 +234 800 CHEMISTRY</p>
+</footer>
+
+<script>
+    // =============================================
+    // OPAY ACCOUNT & PAYMENT
+    // =============================================
+    const OPAY_ACCOUNT = { bank: "Opay (Paycom)", accountNumber: "8052059012", accountName: "Alade Timothy Olarewaju", amount: 1500 };
+    let paymentRequests = JSON.parse(localStorage.getItem('chem_payment_requests')) || [];
+    
+    // =============================================
+    // AUTHENTICATION
+    // =============================================
+    let currentUser = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if (!currentUser) window.location.href = 'chemistry-login.html';
+    
+    let users = JSON.parse(localStorage.getItem('chemistry_users')) || [];
+    let userData = users.find(u => u.id === currentUser.id);
+    if (!userData) { sessionStorage.removeItem('chemistry_currentUser'); window.location.href = 'chemistry-login.html'; }
+    
+    let isPremium = userData.premium || false;
+    currentUser.premium = isPremium;
+    sessionStorage.setItem('chemistry_currentUser', JSON.stringify(currentUser));
+    
+    // =============================================
+    // UI UPDATES
+    // =============================================
+    function updateUI() {
+        if (isPremium) {
+            document.getElementById('premiumBadge').textContent = '👑 Premium Active';
+            document.getElementById('premiumBadge').style.background = '#00a86b';
+            const premiumCard = document.getElementById('premiumCard');
+            if (premiumCard) {
+                premiumCard.innerHTML = `
+                    <h3 style="color:#1a5c2a;">👑 Premium Active</h3>
+                    <p>✅ You have full access to all 20 chapters and unlimited AI!</p>
+                    <button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Back to Library</button>
+                `;
+            }
+        }
+    }
+    
+    // =============================================
+    // PAYMENT FUNCTIONS
+    // =============================================
+    function copyAccountNumber() { navigator.clipboard.writeText(OPAY_ACCOUNT.accountNumber); alert('✅ Account number copied: ' + OPAY_ACCOUNT.accountNumber); }
+    
+    function openPaymentModal() {
+        if (isPremium) { alert('You are already a Premium member!'); return; }
+        document.getElementById('payerName').value = currentUser.name || '';
+        document.getElementById('payerEmail').value = currentUser.email || '';
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+    
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+        document.getElementById('paymentStatus').style.display = 'none';
+        document.getElementById('paymentStatus').className = 'payment-status';
+    }
+    
+    function submitPaymentRequest() {
+        const name = document.getElementById('payerName').value.trim();
+        const email = document.getElementById('payerEmail').value.trim();
+        const ref = document.getElementById('transactionRef').value.trim();
+        const amount = document.getElementById('paymentAmount').value.trim();
+        const statusDiv = document.getElementById('paymentStatus');
+        
+        if (!name || !email) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-error'; statusDiv.innerHTML = '❌ Please enter your name and email.'; return; }
+        if (!ref) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-error'; statusDiv.innerHTML = '❌ Please enter the Opay transaction reference.'; return; }
+        if (amount != OPAY_ACCOUNT.amount) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-error'; statusDiv.innerHTML = `❌ Payment amount must be exactly ₦${OPAY_ACCOUNT.amount}.`; return; }
+        
+        const existingRequest = paymentRequests.find(r => r.reference === ref);
+        if (existingRequest) { statusDiv.style.display = 'block'; statusDiv.className = 'payment-status status-pending'; statusDiv.innerHTML = '⏳ This payment reference has already been submitted and is pending verification.'; return; }
+        
+        paymentRequests.push({
+            id: 'PAY_' + Date.now(), userId: currentUser.id, userName: name, userEmail: email,
+            reference: ref, amount: parseFloat(amount), status: 'pending',
+            submittedAt: new Date().toISOString(), verifiedAt: null
+        });
+        localStorage.setItem('chem_payment_requests', JSON.stringify(paymentRequests));
+        
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'payment-status status-pending';
+        statusDiv.innerHTML = `⏳ Payment submitted for verification!<br><br><strong>Reference:</strong> ${ref}<br><strong>Amount:</strong> ₦${amount}<br><br>Your premium access will be activated after we confirm your payment (usually within 24 hours).<br><br><strong>Note:</strong> Access is NOT immediate. We verify every payment manually.`;
+    }
+    
+    // =============================================
+    // AI FUNCTIONS
+    // =============================================
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = `message ${sender}-msg`;
+        div.innerHTML = text;
+        document.getElementById('chatMessages').appendChild(div);
+        document.getElementById('aiBody').scrollTop = document.getElementById('aiBody').scrollHeight;
+    }
+    
+    function getAIResponse(question) {
+        const q = question.toLowerCase().trim();
+        if (q.includes('time')) return `🕐 ${new Date().toLocaleTimeString()} | ${new Date().toDateString()}`;
+        if ((q.includes('chemistry') && q.includes('what')) || q.includes('define chemistry')) {
+            return '🧪 <strong>Chemistry</strong> is the branch of science that studies the composition, structure, properties, and changes of matter. It is called the "central science" because it connects physics, biology, and medicine.';
+        }
+        if (q.includes('branch')) {
+            return '📚 <strong>6 Main Branches of Chemistry:</strong><br>1. Organic (carbon compounds)<br>2. Inorganic (non-carbon compounds)<br>3. Physical (physics of reactions)<br>4. Analytical (measurement/analysis)<br>5. Biochemistry (living systems)<br>6. Industrial (large-scale production)';
+        }
+        if (q.includes('scientific method')) {
+            return '🔬 <strong>Scientific Method Steps:</strong><br>1. Observation<br>2. Question<br>3. Hypothesis<br>4. Experiment<br>5. Analysis<br>6. Conclusion';
+        }
+        if (q.includes('lab') || q.includes('safety')) {
+            return '⚠️ <strong>Lab Safety Rules:</strong><br>• Wear goggles and lab coat<br>• Never eat or drink<br>• Don\'t smell chemicals directly<br>• Read labels carefully<br>• Know where the fire extinguisher is';
+        }
+        if (q.includes('organic')) return '🧪 <strong>Organic Chemistry:</strong> Study of carbon-containing compounds (plastics, drugs, fuels, DNA).';
+        if (q.includes('inorganic')) return '🧪 <strong>Inorganic Chemistry:</strong> Study of non-carbon compounds (metals, salts, acids, minerals).';
+        if (q.includes('hello') || q.includes('hi')) return `👋 Hello ${currentUser.name.split(' ')[0]}! I'm your Chemistry AI tutor. Ask me about chemistry branches, lab safety, or the scientific method!`;
+        return `🤔 I'm here to help with chemistry! Try asking: "What is chemistry?" or "Branches of chemistry" or "Lab safety rules" or "Scientific method"`;
+    }
+    
+    function askAI() {
+        const input = document.getElementById('aiInput');
+        const q = input.value.trim();
+        if (!q) return;
+        addMessage(q, 'user');
+        input.value = '';
+        setTimeout(() => addMessage(getAIResponse(q), 'ai'), 500);
+    }
+    
+    function askThis(q) { document.getElementById('aiInput').value = q; askAI(); }
+    function closeAI() { document.getElementById('aiWidget').style.display = 'none'; document.getElementById('floatingBtn').style.display = 'flex'; }
+    function openAI() { document.getElementById('aiWidget').style.display = 'block'; document.getElementById('floatingBtn').style.display = 'none'; }
+    function logout() { sessionStorage.removeItem('chemistry_currentUser'); window.location.href = 'chemistry-login.html'; }
+    
+    // Expose functions
+    window.askAI = askAI;
+    window.askThis = askThis;
+    window.closeAI = closeAI;
+    window.openAI = openAI;
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
+    window.submitPaymentRequest = submitPaymentRequest;
+    window.copyAccountNumber = copyAccountNumber;
+    window.logout = logout;
+    
+    // Initialize
+    updateUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Organic Chemistry I | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .chapter-content h3 { color: #0d3b1a; margin: 1.8rem 0 1rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .example-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #1a5c2a; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-body { padding: 15px; height: 280px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; flex-wrap: wrap; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .ai-widget { width: 95%; right: 2.5%; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><h1>🧪 ChemistryMaster.ng</h1><span>Chapter 8: Organic Chemistry I</span></div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb"><a href="chemistry-index.html">Library</a> › <strong>Chapter 8: Organic Chemistry I</strong></div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header"><h1>Chapter 8: Organic Chemistry I</h1><div class="chapter-meta"><span>📗 SS2 First Term</span><span>⏱️ Reading: 40 mins</span></div></div>
+        <div class="learning-objectives"><h3>🎯 Learning Objectives</h3><ul><li>Define organic chemistry</li><li>Identify hydrocarbons and their types</li><li>Name alkanes, alkenes, and alkynes (IUPAC)</li><li>Understand isomerism</li><li>Describe functional groups</li></ul></div>
+        
+        <article class="chapter-content">
+            <h2>8.1 What is Organic Chemistry?</h2>
+            <div class="definition-box"><strong>📌 Organic Chemistry:</strong> The study of carbon compounds (except CO, CO₂, carbonates, and cyanides). All organic compounds contain carbon, usually bonded to hydrogen, oxygen, nitrogen, or other elements.</div>
+            
+            <h2>8.2 Hydrocarbons</h2>
+            <div class="definition-box"><strong>📌 Hydrocarbons:</strong> Compounds containing ONLY carbon and hydrogen.</div>
+            <table>
+                <tr><th>Type</th><th>Bonds</th><th>General Formula</th><th>Suffix</th></tr>
+                <tr><td><strong>Alkanes</strong></td><td>Single (C-C)</td><td>CₙH₂ₙ₊₂</td><td>-ane</td></tr>
+                <tr><td><strong>Alkenes</strong></td><td>Double (C=C)</td><td>CₙH₂ₙ</td><td>-ene</td></tr>
+                <tr><td><strong>Alkynes</strong></td><td>Triple (C≡C)</td><td>CₙH₂ₙ₋₂</td><td>-yne</td></tr>
+            </table>
+            
+            <h2>8.3 Alkanes (Saturated Hydrocarbons)</h2>
+            <table><tr><th>Formula</th><th>Name</th><th>Formula</th><th>Name</th></tr><tr><td>CH₄</td><td>Methane</td><td>C₅H₁₂</td><td>Pentane</td></tr><tr><td>C₂H₆</td><td>Ethane</td><td>C₆H₁₄</td><td>Hexane</td></tr><tr><td>C₃H₈</td><td>Propane</td><td>C₇H₁₆</td><td>Heptane</td></tr><tr><td>C₄H₁₀</td><td>Butane</td><td>C₈H₁₈</td><td>Octane</td></tr></table>
+            
+            <h2>8.4 Alkenes (Unsaturated)</h2>
+            <p>Contain at least one C=C double bond. More reactive than alkanes.</p>
+            <div class="example-box"><strong>📐 Examples:</strong> Ethene (C₂H₄), Propene (C₃H₆), Butene (C₄H₈)</div>
+            
+            <h2>8.5 Alkynes</h2>
+            <p>Contain at least one C≡C triple bond. Even more reactive.</p>
+            <div class="example-box"><strong>📐 Example:</strong> Ethyne (C₂H₂) — commonly called acetylene, used in welding.</div>
+            
+            <h2>8.6 Functional Groups</h2>
+            <table><tr><th>Group</th><th>Formula</th><th>Example</th></tr><tr><td>Alkene</td><td>C=C</td><td>Ethene</td></tr><tr><td>Alcohol</td><td>-OH</td><td>Ethanol (C₂H₅OH)</td></tr><tr><td>Carboxylic Acid</td><td>-COOH</td><td>Ethanoic acid (CH₃COOH)</td></tr><tr><td>Ester</td><td>-COO-</td><td>Ethyl ethanoate</td></tr><tr><td>Amine</td><td>-NH₂</td><td>Methylamine</td></tr></table>
+            
+            <div class="key-point"><strong>🎯 WAEC/NECO:</strong> IUPAC naming, alkane/alkene/alkyne identification, and functional groups are frequently tested!</div>
+            
+            <div style="background:#e8f5e9; padding:1.5rem; border-radius:12px; margin-top:2rem;"><h3 style="color:#1a5c2a;">📝 Chapter 8 Summary</h3><ul><li>Organic chemistry = study of carbon compounds</li><li>Alkanes: single bonds (CₙH₂ₙ₊₂, suffix -ane)</li><li>Alkenes: double bonds (CₙH₂ₙ, suffix -ene)</li><li>Alkynes: triple bonds (CₙH₂ₙ₋₂, suffix -yne)</li><li>Functional groups: -OH (alcohol), -COOH (acid), -COO- (ester)</li></ul></div>
+        </article>
+        
+        <div class="chapter-nav"><a href="chem-ch7-acids.html">← Previous: Chapter 7</a><a href="chem-ch9-kinetics.html" class="next-chapter">Next: Chapter 9 →</a></div>
+    </main>
+    
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard"><h3 style="color:#1a5c2a;">👑 ChemistryMaster Premium</h3><div class="price-naira">₦1,500 <small>one-time</small></div><ul style="margin:1rem 0 1.5rem 1.5rem;"><li>✅ All 20 Chapters</li><li>✅ Unlimited AI Tutor</li><li>✅ WAEC/NECO Prep</li></ul><button class="btn-premium" onclick="openPaymentModal()">💳 Pay with Opay</button><button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Library</button></div>
+    </aside>
+</div>
+
+<div class="ai-widget" id="aiWidget"><div class="ai-header"><span>🧪 Chemistry AI</span><span onclick="closeAI()">✕</span></div><div class="ai-body" id="aiBody"><div class="message ai-msg"><strong>👋 Hello!</strong> Ask me about organic chemistry!</div><div id="chatMessages"></div></div><div class="chips"><span class="chip" onclick="askThis('What are alkanes?')">🔗 Alkanes</span><span class="chip" onclick="askThis('What are alkenes?')">🔗 Alkenes</span><span class="chip" onclick="askThis('Functional groups list')">⚛️ Groups</span></div><div class="ai-input"><input type="text" id="aiInput" placeholder="Ask me..." onkeypress="if(event.key==='Enter') askAI()"><button onclick="askAI()">Send</button></div></div>
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+<footer><p>© 2024 ChemistryMaster.ng</p></footer>
+
+<script>
+    const OPAY = { bank:"Opay", account:"8052059012", name:"Alade Timothy Olarewaju", amount:1500 };
+    let user = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if(!user) window.location.href='chemistry-login.html';
+    let users = JSON.parse(localStorage.getItem('chemistry_users'))||[];
+    let uData = users.find(u=>u.id===user.id);
+    let premium = uData.premium||false;
+    if(premium){ document.getElementById('premiumBadge').textContent='👑 Premium'; document.getElementById('premiumBadge').style.background='#00a86b'; }
+    
+    function addMsg(t,s){ let d=document.createElement('div'); d.className=`message ${s}-msg`; d.innerHTML=t; document.getElementById('chatMessages').appendChild(d); document.getElementById('aiBody').scrollTop=document.getElementById('aiBody').scrollHeight; }
+    function getAI(q){
+        q=q.toLowerCase();
+        if(q.includes('alkane')) return '🔗 Alkanes: Single bonds, CₙH₂ₙ₊₂. Examples: CH₄ (methane), C₂H₆ (ethane). Saturated hydrocarbons.';
+        if(q.includes('alkene')) return '🔗 Alkenes: Double bonds (C=C), CₙH₂ₙ. Examples: C₂H₄ (ethene), C₃H₆ (propene). Unsaturated.';
+        if(q.includes('alkyne')) return '🔗 Alkynes: Triple bonds (C≡C), CₙH₂ₙ₋₂. Example: C₂H₂ (ethyne/acetylene). Used in welding.';
+        if(q.includes('functional')) return '⚛️ Groups: -OH (alcohol), -COOH (carboxylic acid), -COO- (ester), -NH₂ (amine), -CHO (aldehyde).';
+        if(q.includes('hello')||q.includes('hi')) return '👋 Hello! Ask me about hydrocarbons or functional groups!';
+        return '🤔 Try: "Alkanes" or "Alkenes" or "Functional groups"';
+    }
+    function askAI(){ let i=document.getElementById('aiInput'), q=i.value.trim(); if(!q) return; addMsg(q,'user'); i.value=''; setTimeout(()=>addMsg(getAI(q),'ai'),500); }
+    function askThis(q){ document.getElementById('aiInput').value=q; askAI(); }
+    function closeAI(){ document.getElementById('aiWidget').style.display='none'; document.getElementById('floatingBtn').style.display='flex'; }
+    function openAI(){ document.getElementById('aiWidget').style.display='block'; document.getElementById('floatingBtn').style.display='none'; }
+    function openPaymentModal(){ if(premium){ alert('Already Premium!'); return; } alert('Pay ₦1,500 to Opay: 8052059012 - Alade Timothy Olarewaju'); }
+    function logout(){ sessionStorage.removeItem('chemistry_currentUser'); window.location.href='chemistry-login.html'; }
+    
+    window.askAI=askAI; window.askThis=askThis; window.closeAI=closeAI; window.openAI=openAI;
+    window.openPaymentModal=openPaymentModal; window.logout=logout;
+</script>
+</body>
+</html>

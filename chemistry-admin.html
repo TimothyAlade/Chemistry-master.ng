@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; padding: 2rem; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { color: #1a5c2a; margin-bottom: 1rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 0.5rem; }
+        h2 { color: #1a5c2a; margin: 2rem 0 1rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: #1a5c2a; }
+        .stat-label { color: #666; margin-top: 0.5rem; }
+        .login-box { background: white; border-radius: 16px; padding: 2rem; max-width: 400px; margin: 100px auto; text-align: center; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; }
+        .login-box button { width: 100%; padding: 12px; background: #1a5c2a; color: white; border: none; border-radius: 10px; cursor: pointer; }
+        .hidden { display: none !important; }
+        table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+        th { background: #1a5c2a; color: white; padding: 1rem; text-align: left; }
+        td { padding: 1rem; border-bottom: 1px solid #e0e0e0; }
+        tr:last-child td { border-bottom: none; }
+        .status-badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+        .btn { padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin-right: 5px; }
+        .btn-approve { background: #00a86b; color: white; }
+        .btn-reject { background: #dc3545; color: white; }
+        .btn-delete { background: #6c757d; color: white; }
+        .btn-logout { background: #dc3545; color: white; padding: 0.5rem 1.5rem; border-radius: 5px; text-decoration: none; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .tabs { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .tab { padding: 0.5rem 1.5rem; background: #e0e0e0; border: none; border-radius: 30px; cursor: pointer; }
+        .tab.active { background: #1a5c2a; color: white; }
+        .refresh-btn { background: #1a5c2a; color: white; padding: 0.5rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <h2 style="color:#1a5c2a; margin-bottom:1.5rem;">🧪 Chemistry Admin Login</h2>
+            <input type="password" id="adminPassword" placeholder="Enter Admin Password" onkeypress="if(event.key==='Enter') login()">
+            <button onclick="login()">Login</button>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;">Default password: chemadmin123</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden">
+        <div class="container">
+            <div class="navbar">
+                <h1>🧪 ChemistryMaster Admin Panel</h1>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <button class="refresh-btn" onclick="loadAllData()">🔄 Refresh</button>
+                    <a href="#" class="btn-logout" onclick="logout()">🚪 Logout</a>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number" id="totalUsers">0</div><div class="stat-label">Total Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="premiumUsers">0</div><div class="stat-label">Premium Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="pendingPayments">0</div><div class="stat-label">Pending Payments</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalRevenue">₦0</div><div class="stat-label">Total Revenue</div></div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('pending')">⏳ Pending Payments</button>
+                <button class="tab" onclick="switchTab('approved')">✅ Approved Payments</button>
+                <button class="tab" onclick="switchTab('users')">👥 All Users</button>
+            </div>
+            
+            <div id="pendingTab">
+                <h2>⏳ Pending Payment Requests</h2>
+                <table id="pendingTable"><thead><tr><th>Date</th><th>User</th><th>Email</th><th>Reference</th><th>Amount</th><th>Actions</th></tr></thead><tbody id="pendingTableBody"></tbody></table>
+            </div>
+            
+            <div id="approvedTab" class="hidden">
+                <h2>✅ Approved Payments</h2>
+                <table id="approvedTable"><thead><tr><th>Verified</th><th>User</th><th>Email</th><th>Reference</th><th>Amount</th><th>Actions</th></tr></thead><tbody id="approvedTableBody"></tbody></table>
+            </div>
+            
+            <div id="usersTab" class="hidden">
+                <h2>👥 Registered Users</h2>
+                <table id="usersTable"><thead><tr><th>Joined</th><th>Name</th><th>Email</th><th>Status</th><th>Questions</th><th>Actions</th></tr></thead><tbody id="usersTableBody"></tbody></table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_PASSWORD = 'chemadmin123';
+        const STORAGE_KEY = 'chemistry_users';
+        const PAYMENT_KEY = 'chem_payment_requests';
+        let isLoggedIn = sessionStorage.getItem('chem_admin_logged_in') === 'true';
+        
+        if (isLoggedIn) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            loadAllData();
+        }
+        
+        function login() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('chem_admin_logged_in', 'true');
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                loadAllData();
+            } else { alert('Invalid password!'); }
+        }
+        
+        function logout() { sessionStorage.removeItem('chem_admin_logged_in'); location.reload(); }
+        
+        function loadAllData() { loadPendingPayments(); loadApprovedPayments(); loadUsers(); updateStats(); }
+        
+        function updateStats() {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const payments = JSON.parse(localStorage.getItem(PAYMENT_KEY)) || [];
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('premiumUsers').textContent = users.filter(u => u.premium).length;
+            document.getElementById('pendingPayments').textContent = payments.filter(p => p.status === 'pending').length;
+            document.getElementById('totalRevenue').textContent = '₦' + payments.filter(p => p.status === 'approved').reduce((s, p) => s + (p.amount || 1500), 0).toLocaleString();
+        }
+        
+        function loadPendingPayments() {
+            const payments = JSON.parse(localStorage.getItem(PAYMENT_KEY)) || [];
+            const pending = payments.filter(p => p.status === 'pending').sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+            const tbody = document.getElementById('pendingTableBody');
+            if (pending.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem;">No pending payments</td></tr>'; return; }
+            tbody.innerHTML = pending.map(p => `<tr><td>${new Date(p.submittedAt).toLocaleDateString()}</td><td><strong>${p.userName}</strong></td><td>${p.userEmail}</td><td><code>${p.reference}</code></td><td>₦${p.amount}</td><td><button class="btn btn-approve" onclick="approvePayment('${p.id}')">✅ Approve</button><button class="btn btn-reject" onclick="rejectPayment('${p.id}')">❌ Reject</button></td></tr>`).join('');
+        }
+        
+        function loadApprovedPayments() {
+            const payments = JSON.parse(localStorage.getItem(PAYMENT_KEY)) || [];
+            const approved = payments.filter(p => p.status === 'approved').sort((a, b) => new Date(b.verifiedAt) - new Date(a.verifiedAt));
+            const tbody = document.getElementById('approvedTableBody');
+            if (approved.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem;">No approved payments</td></tr>'; return; }
+            tbody.innerHTML = approved.map(p => `<tr><td>${new Date(p.verifiedAt).toLocaleDateString()}</td><td><strong>${p.userName}</strong></td><td>${p.userEmail}</td><td><code>${p.reference}</code></td><td>₦${p.amount}</td><td><button class="btn btn-delete" onclick="deletePayment('${p.id}')">🗑️ Delete</button></td></tr>`).join('');
+        }
+        
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const sorted = users.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = sorted.map(u => `<tr><td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</td><td><strong>${u.name}</strong></td><td>${u.email}</td><td><span class="status-badge ${u.premium ? 'status-approved' : 'status-pending'}">${u.premium ? 'Premium' : 'Free'}</span></td><td>${u.questions || 0}</td><td>${!u.premium ? `<button class="btn btn-approve" onclick="manuallyActivate('${u.id}')">⭐ Make Premium</button>` : ''}<button class="btn btn-reject" onclick="resetQuestions('${u.id}')">🔄 Reset</button></td></tr>`).join('');
+        }
+        
+        function approvePayment(paymentId) {
+            const payments = JSON.parse(localStorage.getItem(PAYMENT_KEY)) || [];
+            const idx = payments.findIndex(p => p.id === paymentId);
+            if (idx === -1) return;
+            const payment = payments[idx];
+            if (confirm(`Approve payment from ${payment.userName} for ₦${payment.amount}?`)) {
+                payments[idx].status = 'approved';
+                payments[idx].verifiedAt = new Date().toISOString();
+                localStorage.setItem(PAYMENT_KEY, JSON.stringify(payments));
+                const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+                const uIdx = users.findIndex(u => u.id === payment.userId);
+                if (uIdx !== -1) { users[uIdx].premium = true; users[uIdx].paymentRef = payment.reference; localStorage.setItem(STORAGE_KEY, JSON.stringify(users)); }
+                alert(`✅ Approved! ${payment.userName} is now Premium!`);
+                loadAllData();
+            }
+        }
+        
+        function rejectPayment(paymentId) {
+            const payments = JSON.parse(localStorage.getItem(PAYMENT_KEY)) || [];
+            const idx = payments.findIndex(p => p.id === paymentId);
+            if (idx === -1) return;
+            if (confirm(`Reject payment from ${payments[idx].userName}?`)) { payments.splice(idx, 1); localStorage.setItem(PAYMENT_KEY, JSON.stringify(payments)); loadAllData(); }
+        }
+        
+        function deletePayment(paymentId) {
+            const payments = JSON.parse(localStorage.getItem(PAYMENT_KEY)) || [];
+            if (confirm('Delete this record?')) { localStorage.setItem(PAYMENT_KEY, JSON.stringify(payments.filter(p => p.id !== paymentId))); loadAllData(); }
+        }
+        
+        function manuallyActivate(userId) {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const idx = users.findIndex(u => u.id === userId);
+            if (idx === -1) return;
+            if (confirm(`Activate Premium for ${users[idx].name}?`)) { users[idx].premium = true; localStorage.setItem(STORAGE_KEY, JSON.stringify(users)); alert('✅ Activated!'); loadAllData(); }
+        }
+        
+        function resetQuestions(userId) {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const idx = users.findIndex(u => u.id === userId);
+            if (idx === -1) return;
+            if (confirm(`Reset questions for ${users[idx].name}?`)) { users[idx].questions = 0; users[idx].questionsDate = new Date().toDateString(); localStorage.setItem(STORAGE_KEY, JSON.stringify(users)); alert('✅ Reset!'); loadAllData(); }
+        }
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('pendingTab').classList.add('hidden');
+            document.getElementById('approvedTab').classList.add('hidden');
+            document.getElementById('usersTab').classList.add('hidden');
+            if (tab === 'pending') document.getElementById('pendingTab').classList.remove('hidden');
+            else if (tab === 'approved') document.getElementById('approvedTab').classList.remove('hidden');
+            else document.getElementById('usersTab').classList.remove('hidden');
+        }
+        
+        window.login = login; window.logout = logout; window.switchTab = switchTab;
+        window.approvePayment = approvePayment; window.rejectPayment = rejectPayment;
+        window.deletePayment = deletePayment; window.manuallyActivate = manuallyActivate;
+        window.resetQuestions = resetQuestions; window.loadAllData = loadAllData;
+    </script>
+</body>
+</html>

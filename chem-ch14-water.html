@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 14: Water & Solutions | ChemistryMaster.ng</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; background: #f5f7fa; color: #1a1a2e; }
+        .navbar { background: linear-gradient(135deg, #1a5c2a, #0d3b1a); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo h1 { font-size: 1.5rem; font-weight: 600; }
+        .logo span { color: #00c853; font-size: 0.9rem; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+        .premium-badge { background: #ffd700; color: #1a5c2a; padding: 0.5rem 1rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .breadcrumb { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; color: #666; font-size: 0.9rem; }
+        .breadcrumb a { color: #1a5c2a; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .reading-pane { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .chapter-header { margin-bottom: 2rem; border-bottom: 2px solid #1a5c2a; padding-bottom: 1.5rem; }
+        .chapter-header h1 { color: #1a5c2a; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .chapter-meta { color: #666; font-size: 0.95rem; display: flex; gap: 2rem; }
+        .learning-objectives { background: #e8f5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #00c853; }
+        .learning-objectives h3 { color: #1a5c2a; margin-bottom: 0.8rem; }
+        .chapter-content h2 { color: #1a5c2a; margin: 2.5rem 0 1rem; border-left: 4px solid #00c853; padding-left: 1rem; font-size: 1.6rem; }
+        .chapter-content h3 { color: #0d3b1a; margin: 1.8rem 0 1rem; font-size: 1.3rem; }
+        .definition-box { background: #f0f7ff; border: 1px solid #b8d4f0; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .definition-box strong { color: #1a5c2a; }
+        .example-box { background: #fff8e1; border-left: 4px solid #ffc107; padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.8rem; text-align: left; }
+        th { background: #1a5c2a; color: white; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .key-point { background: #fff3cd; border: 1px solid #ffca2c; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .premium-sidebar { position: sticky; top: 2rem; height: fit-content; }
+        .premium-card { background: linear-gradient(145deg, #ffffff, #e8f5e9); border-radius: 20px; padding: 2rem 1.5rem; border: 1px solid #00c853; }
+        .price-naira { font-size: 2.5rem; font-weight: 800; color: #1a5c2a; margin: 1rem 0; }
+        .btn-premium { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a5c2a; border: none; padding: 1rem; border-radius: 50px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-outline { background: transparent; border: 2px solid #1a5c2a; color: #1a5c2a; padding: 0.8rem; border-radius: 50px; font-weight: 600; width: 100%; cursor: pointer; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; }
+        .chapter-nav a { color: #1a5c2a; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; }
+        .chapter-nav a:hover { background: #e8f5e9; }
+        .chapter-nav .next-chapter { background: #1a5c2a; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 20px; padding: 30px; width: 450px; text-align: center; }
+        .copy-btn { background: #1a5c2a; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .close-modal { background: #ddd; color: #333; padding: 12px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .payment-status { margin-top: 15px; padding: 10px; border-radius: 8px; display: none; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .ai-widget { position: fixed; bottom: 20px; right: 20px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 1000; border: 2px solid #1a5c2a; }
+        .ai-header { background: #1a5c2a; color: white; padding: 15px; border-radius: 18px 18px 0 0; display: flex; justify-content: space-between; }
+        .ai-body { padding: 15px; height: 300px; overflow-y: auto; background: #f8f9fa; }
+        .message { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 85%; }
+        .user-msg { background: #1a5c2a; color: white; margin-left: auto; }
+        .ai-msg { background: #e8f5e9; }
+        .ai-input { display: flex; padding: 15px; border-top: 1px solid #ddd; background: white; }
+        .ai-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 30px; }
+        .ai-input button { background: #1a5c2a; color: white; border: none; padding: 10px 20px; border-radius: 30px; margin-left: 8px; cursor: pointer; }
+        .chips { display: flex; gap: 8px; padding: 0 15px 10px; flex-wrap: wrap; }
+        .chip { background: white; border: 1px solid #1a5c2a; color: #1a5c2a; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #1a5c2a; color: white; border-radius: 50%; display: none; justify-content: center; align-items: center; font-size: 28px; cursor: pointer; z-index: 999; }
+        footer { text-align: center; padding: 2rem; background: #0d3b1a; color: #aaa; margin-top: 3rem; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><h1>🧪 ChemistryMaster.ng</h1><span>Chapter 14: Water & Solutions</span></div>
+    <div class="nav-links">
+        <a href="chemistry-index.html">📚 Library</a>
+        <a href="chemistry-dashboard.html">📊 Dashboard</a>
+        <a href="#" class="premium-badge" id="premiumBadge">✨ Go Premium ₦1,500</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </div>
+</nav>
+
+<div class="breadcrumb"><a href="chemistry-index.html">Library</a> › <strong>Chapter 14: Water & Solutions</strong></div>
+
+<div class="container">
+    <main class="reading-pane">
+        <div class="chapter-header"><h1>Chapter 14: Water & Solutions</h1><div class="chapter-meta"><span>📗 SS2 Second Term</span><span>⏱️ Reading: 35 mins</span></div></div>
+        <div class="learning-objectives"><h3>🎯 Learning Objectives</h3><ul><li>Distinguish hard and soft water</li><li>Explain water purification methods</li><li>Define solubility and factors affecting it</li><li>Interpret solubility curves</li><li>Understand water treatment</li></ul></div>
+        
+        <article class="chapter-content">
+            <h2>14.1 Hard vs Soft Water</h2>
+            <div class="definition-box"><strong>📌 Hard Water:</strong> Water that does NOT lather easily with soap due to dissolved Ca²⁺ and Mg²⁺ ions.<br><strong>📌 Soft Water:</strong> Lathers easily with soap.</div>
+            
+            <table>
+                <tr><th>Temporary Hardness</th><th>Permanent Hardness</th></tr>
+                <tr><td>Caused by Ca(HCO₃)₂, Mg(HCO₃)₂</td><td>Caused by CaSO₄, MgSO₄, CaCl₂</td></tr>
+                <tr><td>Removed by <strong>boiling</strong></td><td><strong>NOT</strong> removed by boiling</td></tr>
+                <tr><td>Ca(HCO₃)₂ → CaCO₃↓ + H₂O + CO₂</td><td>Requires chemical treatment</td></tr>
+            </table>
+            
+            <h2>14.2 Removing Hardness</h2>
+            <ul>
+                <li><strong>Boiling:</strong> Only for temporary hardness</li>
+                <li><strong>Adding washing soda (Na₂CO₃):</strong> Precipitates Ca²⁺/Mg²⁺ as carbonates</li>
+                <li><strong>Ion exchange (Permutit):</strong> Replaces Ca²⁺/Mg²⁺ with Na⁺ using zeolite</li>
+                <li><strong>Distillation:</strong> Produces pure water (expensive)</li>
+            </ul>
+            <div class="example-box"><strong>📐 Washing Soda Reaction:</strong><br>CaSO₄ + Na₂CO₃ → CaCO₃↓ + Na₂SO₄</div>
+            
+            <h2>14.3 Water Purification (Treatment)</h2>
+            <ol>
+                <li><strong>Filtration:</strong> Removes large particles (leaves, debris)</li>
+                <li><strong>Sedimentation:</strong> Particles settle to bottom</li>
+                <li><strong>Coagulation:</strong> Alum (Al₂(SO₄)₃) added to clump fine particles</li>
+                <li><strong>Filtration through sand/gravel:</strong> Removes remaining particles</li>
+                <li><strong>Chlorination:</strong> Cl₂ added to kill bacteria and pathogens</li>
+                <li><strong>Fluoridation:</strong> NaF added to prevent tooth decay (optional)</li>
+            </ol>
+            
+            <h2>14.4 Solubility</h2>
+            <div class="definition-box"><strong>📌 Solubility:</strong> The maximum mass of solute that dissolves in 100g of solvent at a given temperature.</div>
+            
+            <h3>Factors Affecting Solubility</h3>
+            <table>
+                <tr><th>Factor</th><th>Effect on Solids</th><th>Effect on Gases</th></tr>
+                <tr><td>Temperature ↑</td><td>Usually increases</td><td>Decreases</td></tr>
+                <tr><td>Pressure ↑</td><td>No effect</td><td>Increases (Henry's Law)</td></tr>
+                <tr><td>Nature of solute/solvent</td><td>"Like dissolves like"</td><td>—</td></tr>
+                <tr><td>Surface area ↑</td><td>Faster dissolving (not more)</td><td>—</td></tr>
+            </table>
+            
+            <h2>14.5 Solubility Curves</h2>
+            <p>A solubility curve is a graph showing how solubility changes with temperature.</p>
+            <ul>
+                <li><strong>Above the curve:</strong> Supersaturated solution</li>
+                <li><strong>On the curve:</strong> Saturated solution</li>
+                <li><strong>Below the curve:</strong> Unsaturated solution</li>
+            </ul>
+            <div class="key-point"><strong>💡 Note:</strong> Most solids show increasing solubility with temperature, but gases show decreasing solubility.</div>
+            
+            <h2>14.6 Types of Solutions</h2>
+            <table>
+                <tr><th>Type</th><th>Definition</th></tr>
+                <tr><td>Unsaturated</td><td>More solute can still dissolve</td></tr>
+                <tr><td>Saturated</td><td>No more solute can dissolve at that temperature</td></tr>
+                <tr><td>Supersaturated</td><td>Contains more solute than normally possible (unstable)</td></tr>
+                <tr><td>Dilute</td><td>Small amount of solute relative to solvent</td></tr>
+                <tr><td>Concentrated</td><td>Large amount of solute relative to solvent</td></tr>
+            </table>
+            
+            <h2>14.7 Advantages and Disadvantages of Hard Water</h2>
+            <table>
+                <tr><th>Advantages ✅</th><th>Disadvantages ❌</th></tr>
+                <tr><td>Provides calcium for bones/teeth</td><td>Wastes soap (forms scum)</td></tr>
+                <tr><td>Tastes better than soft water</td><td>Scale in kettles and pipes</td></tr>
+                <tr><td>Used in brewing beer</td><td>Damages industrial boilers</td></tr>
+            </table>
+            
+            <div style="background:#e8f5e9; padding:1.5rem; border-radius:12px; margin-top:2rem;"><h3 style="color:#1a5c2a;">📝 Chapter 14 Summary</h3><ul><li>Hard water: Ca²⁺/Mg²⁺ ions, doesn't lather with soap</li><li>Temporary hardness: removed by boiling (Ca(HCO₃)₂ → CaCO₃↓)</li><li>Permanent hardness: needs Na₂CO₃ or ion exchange</li><li>Solubility = max solute per 100g solvent at given temperature</li><li>Purification: Filtration → Sedimentation → Coagulation → Chlorination</li></ul></div>
+        </article>
+        
+        <div class="chapter-nav"><a href="chem-ch13-nonmetals.html">← Previous: Chapter 13</a><a href="chem-ch15-organic2.html" class="next-chapter">Next: Chapter 15 →</a></div>
+    </main>
+    
+    <aside class="premium-sidebar">
+        <div class="premium-card" id="premiumCard"><h3 style="color:#1a5c2a;">👑 ChemistryMaster Premium</h3><div class="price-naira">₦1,500 <small>one-time</small></div><ul style="margin:1rem 0 1.5rem 1.5rem;"><li>✅ All 20 Chapters</li><li>✅ Unlimited AI Tutor</li><li>✅ WAEC/NECO Prep</li></ul><button class="btn-premium" onclick="openPaymentModal()">💳 Pay with Opay</button><button class="btn-outline" onclick="window.location.href='chemistry-index.html'">📚 Library</button></div>
+    </aside>
+</div>
+
+<div class="ai-widget" id="aiWidget"><div class="ai-header"><span>🧪 Chemistry AI</span><span onclick="closeAI()">✕</span></div><div class="ai-body" id="aiBody"><div class="message ai-msg"><strong>👋 Hello!</strong> Ask me about water!</div><div id="chatMessages"></div></div><div class="chips"><span class="chip" onclick="askThis('Hard vs soft water')">💧 Hardness</span><span class="chip" onclick="askThis('How to purify water?')">🚰 Purify</span><span class="chip" onclick="askThis('What is solubility?')">📊 Solubility</span></div><div class="ai-input"><input type="text" id="aiInput" placeholder="Ask me..." onkeypress="if(event.key==='Enter') askAI()"><button onclick="askAI()">Send</button></div></div>
+<div class="floating-btn" id="floatingBtn" onclick="openAI()">💬</div>
+<footer><p>© 2024 ChemistryMaster.ng • Premium Requires Payment Verification</p></footer>
+
+<script>
+    let user = JSON.parse(sessionStorage.getItem('chemistry_currentUser'));
+    if(!user) window.location.href='chemistry-login.html';
+    let users = JSON.parse(localStorage.getItem('chemistry_users'))||[];
+    let uData = users.find(u=>u.id===user.id);
+    let premium = uData.premium||false;
+    if(premium){ document.getElementById('premiumBadge').textContent='👑 Premium'; document.getElementById('premiumBadge').style.background='#00a86b'; }
+    
+    function addMsg(t,s){ let d=document.createElement('div'); d.className=`message ${s}-msg`; d.innerHTML=t; document.getElementById('chatMessages').appendChild(d); document.getElementById('aiBody').scrollTop=document.getElementById('aiBody').scrollHeight; }
+    function getAI(q){
+        q=q.toLowerCase();
+        if(q.includes('time')) return `🕐 ${new Date().toLocaleTimeString()}`;
+        if(q.includes('hard')||q.includes('soft')) return '💧 Hard water: Ca²⁺/Mg²⁺ ions, no lather with soap. Temporary (Ca(HCO₃)₂) removed by boiling. Permanent (CaSO₄) needs Na₂CO₃.';
+        if(q.includes('purify')||q.includes('treatment')) return '🚰 Water Treatment: Filtration→Sedimentation→Coagulation (alum)→Sand Filtration→Chlorination→Fluoridation.';
+        if(q.includes('solubility')) return '📊 Solubility = max mass of solute per 100g solvent at given temperature. ↑temp usually ↑solubility for solids, ↓ for gases.';
+        if(q.includes('temporary')&&q.includes('permanent')) return '📋 Temporary: Ca(HCO₃)₂, removed by boiling. Permanent: CaSO₄/MgSO₄, needs washing soda or ion exchange.';
+        if(q.includes('ion exchange')||q.includes('permutit')) return '🔄 Ion Exchange: Uses zeolite (sodium aluminum silicate) to replace Ca²⁺/Mg²⁺ with Na⁺ ions.';
+        if(q.includes('hello')||q.includes('hi')) return '👋 Hello! Ask me about water hardness, purification, or solubility!';
+        return '🤔 Try: "Hard vs soft water" or "Water purification" or "What is solubility?"';
+    }
+    function askAI(){ let i=document.getElementById('aiInput'), q=i.value.trim(); if(!q) return; addMsg(q,'user'); i.value=''; setTimeout(()=>addMsg(getAI(q),'ai'),500); }
+    function askThis(q){ document.getElementById('aiInput').value=q; askAI(); }
+    function closeAI(){ document.getElementById('aiWidget').style.display='none'; document.getElementById('floatingBtn').style.display='flex'; }
+    function openAI(){ document.getElementById('aiWidget').style.display='block'; document.getElementById('floatingBtn').style.display='none'; }
+    function openPaymentModal(){ if(premium){ alert('Already Premium!'); return; } alert('Pay ₦1,500 to Opay: 8052059012 - Alade Timothy Olarewaju'); }
+    function logout(){ sessionStorage.removeItem('chemistry_currentUser'); window.location.href='chemistry-login.html'; }
+    
+    window.askAI=askAI; window.askThis=askThis; window.closeAI=closeAI; window.openAI=openAI;
+    window.openPaymentModal=openPaymentModal; window.logout=logout;
+</script>
+</body>
+</html>
